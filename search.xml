@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>Discuz3.4迁移教程（宝塔面板）</title>
+      <link href="/posts/31467/"/>
+      <url>/posts/31467/</url>
+      
+        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>记录一次Discuz的迁移，不使用discuz自带的功能。</p><h2 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h2><h3 id="打包网站"><a href="#打包网站" class="headerlink" title="打包网站"></a>打包网站</h3><p>将需要备份的网站整体打包，下载到本地。可以使用宝塔面板（我这里使用的是国际版宝塔aapanel，差不多）的备份功能。<br><img src="https://img.timero.xyz/i/2022/12/16/639c45e4b09ee.webp"><br>别下错了，要下刚刚备份的，注意文件日期。</p><h3 id="导出数据库"><a href="#导出数据库" class="headerlink" title="导出数据库"></a>导出数据库</h3><p>将数据库导出，保存到本地。也可以使用宝塔面板的功能，进phpMyAdmin自己导出也行。这里演示的是使用宝塔面板的。<br><img src="https://img.timero.xyz/i/2022/12/16/639c4762e659d.webp"></p><h2 id="恢复"><a href="#恢复" class="headerlink" title="恢复"></a>恢复</h2><p>在新服务器中安装宝塔面板并新建网站，将刚刚打包的网站上传并解压至新网站目录。<br>将刚刚导出的数据库重新导入。<br><img src="https://img.timero.xyz/i/2022/12/16/639c4978f2ca7.webp"><br>进入config&#x2F;config_global.php，找到下面一段，按照提示将【】替换为自己的内容。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$_config[&#x27;db&#x27;][&#x27;1&#x27;][&#x27;dbhost&#x27;] = &#x27;localhost&#x27;;</span><br><span class="line">$_config[&#x27;db&#x27;][&#x27;1&#x27;][&#x27;dbuser&#x27;] = &#x27;【新数据库用户名】&#x27;; </span><br><span class="line">$_config[&#x27;db&#x27;][&#x27;1&#x27;][&#x27;dbpw&#x27;] = &#x27;【新数据库密码】&#x27;; </span><br><span class="line">$_config[&#x27;db&#x27;][&#x27;1&#x27;][&#x27;dbcharset&#x27;] = &#x27;utf8&#x27;; </span><br><span class="line">$_config[&#x27;db&#x27;][&#x27;1&#x27;][&#x27;pconnect&#x27;] = &#x27;0&#x27;; </span><br><span class="line">$_config[&#x27;db&#x27;][&#x27;1&#x27;][&#x27;dbname&#x27;] = &#x27;【新数据库名】&#x27;; </span><br><span class="line">$_config[&#x27;db&#x27;][&#x27;1&#x27;][&#x27;tablepre&#x27;] = &#x27;pre_&#x27;; </span><br><span class="line">$_config[&#x27;db&#x27;][&#x27;slave&#x27;] = &#x27;&#x27;; </span><br><span class="line">$_config[&#x27;db&#x27;][&#x27;common&#x27;][&#x27;slave_except_table&#x27;] = &#x27;&#x27;;</span><br></pre></td></tr></table></figure><p>进入config&#x2F;config_ucenter.php。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">define(&#x27;UC_DBHOST&#x27;, &#x27;localhost&#x27;);</span><br><span class="line">define(&#x27;UC_DBUSER&#x27;, &#x27;【新数据库用户名】&#x27;);</span><br><span class="line">define(&#x27;UC_DBPW&#x27;, &#x27;【新数据库密码】&#x27;);</span><br><span class="line">define(&#x27;UC_DBNAME&#x27;, &#x27;【新数据库名】&#x27;);</span><br><span class="line">define(&#x27;UC_DBCHARSET&#x27;, &#x27;utf8&#x27;);</span><br><span class="line">define(&#x27;UC_DBTABLEPRE&#x27;, &#x27;`【新数据库名】`.pre_ucenter_&#x27;);</span><br><span class="line">define(&#x27;UC_DBCONNECT&#x27;, 0);</span><br></pre></td></tr></table></figure><p>进入uc_server&#x2F;data&#x2F;config.inc.php</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">define(&#x27;UC_DBHOST&#x27;, &#x27;localhost&#x27;);</span><br><span class="line">define(&#x27;UC_DBUSER&#x27;, &#x27;【新数据库用户名】&#x27;);</span><br><span class="line">define(&#x27;UC_DBPW&#x27;, &#x27;【新数据库密码】&#x27;);</span><br><span class="line">define(&#x27;UC_DBNAME&#x27;, &#x27;【新数据库名】&#x27;);</span><br><span class="line">define(&#x27;UC_DBCHARSET&#x27;, &#x27;utf8&#x27;);</span><br><span class="line">define(&#x27;UC_DBTABLEPRE&#x27;, &#x27;pre_ucenter_&#x27;);</span><br><span class="line">define(&#x27;UC_COOKIEPATH&#x27;, &#x27;/&#x27;);</span><br></pre></td></tr></table></figure><h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><h2 id="后言"><a href="#后言" class="headerlink" title="后言"></a>后言</h2><p>简单方便高效，鬼知道我在官方的方法上浪费了多少时间🙂</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 经验 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 教程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>KonataのVCR食用手册</title>
+      <link href="/posts/63574/"/>
+      <url>/posts/63574/</url>
+      
+        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文是关于<code>KonataのVCR</code>配置流程及使用技巧的教程，wiki会于不久后上线。</p><h2 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h2><p><code>KonataのVCR</code>可以在全平台使用，包括Web、Linux、Windows、Mac、Android、Android TV、iOS。<br>我们不推荐您通过浏览器使用本服务，因为大多数浏览器不支持HEVC视频的解码，视频播放会出现大量问题。</p><h3 id="桌面端（Linux、Windows、Mac）"><a href="#桌面端（Linux、Windows、Mac）" class="headerlink" title="桌面端（Linux、Windows、Mac）"></a>桌面端（Linux、Windows、Mac）</h3><p>到<a href="https://github.com/jellyfin/jellyfin-media-player/releases/tag/v1.7.1">Github</a>下载您桌面设备对应的客户端。<br>安装完成后打开软件，填入服务器链接，即<code>vcr.timero.xyz</code>。<br><img src="https://img.timero.xyz/i/2022/12/02/6388d72f4ce93.jpg" alt="连接"><br>连接后输入您的账号密码进行登录。<br>完成。</p><h3 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h3><p>到<a href="https://github.com/jellyfin/jellyfin-android/releases/tag/v2.4.4">Github</a>下载客户端并进行安装。<br>下载<a href="https://wwvu.lanzoue.com/b01w3ehwf">MXPalyer</a>(密码:fzvt)作为客户端调用的第三方播放器。<br>连接服务器并进行登录，链接为<code>vcr.timero.xyz</code><br><img src="https://img.timero.xyz/i/2022/12/02/6388d72fd17fc.jpg" alt="连接2"><br>进入设置-客户端设置-视频播放器类型-选择外部播放器-确认。<br><img src="https://img.timero.xyz/i/2022/12/02/6388d7315cfba.jpg" alt="设置"><br><img src="https://img.timero.xyz/i/2022/12/02/6388d726df3e0.jpg" alt="客户端设置"><br><img src="https://img.timero.xyz/i/2022/12/02/6388d72dd1445.jpg" alt="选择外部播放器"><br><img src="https://img.timero.xyz/i/2022/12/02/6388d72e773c5.jpg" alt="确认"><br>在播放视频时选择之前安装的MXPalyer。<br><img src="https://img.timero.xyz/i/2022/12/02/6388d85a90c73.jpg" alt="选择"><br>完成。</p><h3 id="待更"><a href="#待更" class="headerlink" title="待更"></a>待更</h3>]]></content>
+      
+      
+      <categories>
+          
+          <category> 经验 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 教程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>巨人的肩膀</title>
+      <link href="/posts/47137/"/>
+      <url>/posts/47137/</url>
+      
+        <content type="html"><![CDATA[<p>阳光把手中发皱的相纸映的发红，我眯起眼，仔细的观察眼前的巨人，又看了看手中的相片。嗯，不会错，就是这儿，是母亲要我找的巨人像了。</p><p>再三确认后，我松了一口气。漫长旅途的疲惫也如潮水般涌上身体，我把背包随意的扔到白色的雪地上，深深的呼了一口气，热气在眼前变成了一团白雾，我拍了拍身上的雪，准备在巨人脚下生火取暖，周围除了高耸的巨人外都是白茫茫的一片，与这漫无边际的轻盈的雪相比，连背包都变得如巨石般沉重。打开背包，发现里面有一半都被雪浸湿了，真是不走运。我翻了翻背包，从里面拿出了几根还没湿透的木柴，总算是勉强生起了火，至少不会被冻成冰块。我在火焰旁搓着被寒风冻僵的手，检查了一下胸前的摄像机。呼，还好，摄像机没坏。</p><p>一星期前，母亲让我到雪原去给眼前的巨人拍张黄昏时的照片，送到国王手中。除此以外便没再多解释什么了，虽然有点摸不着头脑，不过毕竟是母亲的要求，我在家闲着也是无聊，便翻山越岭来到了这儿。</p><p>我看了看表，下午三点半，离黄昏还有一段时间，那就先找个拍摄的好角度吧。我起身拿着摄像机在巨人周边转悠，将摄像机对准，观察着取景框里的巨人。仔细看看，这巨人还真是大啊，站的这么远也能填满整个相机，一定满载着人们的期望，占据了整个雪原，让之前我遇到的巨人也显得渺小可怜。我在她周围绕着圈走，想要看清楚她的全貌。巨人是位抱着婴孩的母亲，赤裸着身子。好像在哪见过，我搜寻着脑中的记忆。想起来了，这不就是总统信仰的母亲巨人吗？上次还在教堂里看到过微缩版呢。</p><p>太阳渐渐西沉，黄昏时独有的阳光映红了巨人的半边脸庞，强烈的光线让巨人脸上布满了阴影，棱角也变得锐利，表情似笑非笑，让人直冒冷汗。太阳继续西沉，连婴孩也染上了红色，本该哭泣的婴孩却也有了和她母亲一样的笑容，似笑非笑，眼神中充满了刺骨的蔑视。能感受到汗珠正从脊背上冒出来，大脑也变的混乱，周围的一切似乎都要伴着婴孩的笑容和血红色的晚霞熔化。我按下了快门，迅速把眼睛从巨人身上挪开。风夹杂着白色的雪粒吹到我的脸上，我打了个激灵，这才意识到那仅有的两根木柴早已烧完，白色雪地上只剩下了一堆黑色余烬。我拍了拍脸，好让自己清醒过来。看这情况，在这儿过夜是不可能了，只能现在就动身了。我带着昏沉的大脑迈起了步子。</p><p>黄昏的阳光把整个雪原都染成了红色，连身后的脚印也不例外。我抬头看着渐渐老去的太阳，祈祷着能够晚些落去，至少在我离开这个冷的要命的鬼地方之前。</p><p>还好，总算是在太阳落山前赶到了山脚下。我向远处眺望，想找个能过夜的地方，东南方向似乎有些灯光，说不定是旅馆，带着碰碰运气的侥幸心理，我拖着沉重的身体向西北方向走去。</p><p>路很长，我边走边向四周看去。仔细一看，这地方还真是荒凉，走了这么久连一间房子都没见着，全都是枯草断树一类的东西，唯一能确认方向的就是忽明忽暗的灯火了，就这样在荒地中走了好长一段路，灯火的源头逐渐显现出来。门前的招牌虽然破破烂烂的，不过依旧起到了它应有的作用。灯火的源头正是一栋旅馆，是栋两层的木头房子，风一吹就会发出吱呀吱呀的声音。光是从招牌上碎了一半的灯管里发出的。房子破是破了点，过夜应该没什么问题。</p><p>我推开那扇看起来年纪比我还大的木门，发出的声音差点让我以为木屋要散架了。屋里有光，看起来有人在。</p><p>“欢迎光临。”</p><p>沙哑浑厚的声音从屋里传来。一位头发胡子花白的老者正坐在看起来是旅馆前台的木桌子前对我表示欢迎。看到这个点来投宿的客人不会感到吃惊吗？我有些惊讶，一时间忘了回话。</p><p>“客房在二楼，火炉应该还能用，过夜不成问题。”</p><p>老者似乎猜透了我的心思，他手里捧着本书，看起来并没有打算听我说话，我道了谢便上楼去了。</p><p>没想到外面看着这么破旧，房间里的环境却还算不错，有股老房子独有的木头香气。我把背包丢到床上，揉了揉被压酸的肩膀，寻找着能取暖的东西。床对面的墙壁中嵌着一个半封闭式的火炉，通向上面的烟囱，旁边还有一堆干燥的木柴。火炉里还有些余焰，足够把木柴点燃，我数了十根木柴，丢进火炉里，溅起的火星落在了衣服上。</p><p>火炉里跳动的火焰散发着舒适的热气。木柴噼噼啪啪作响，疲劳感一股脑的涌上来。我躺到床上，柔软的褥子把全身的劳累都吸了个干净。窗外传来了淅淅沥沥的雨声，打在玻璃上，为单调的夜空点缀了几粒星光。</p><p>还好找到了旅馆，我这样想着，慢慢进入了梦乡。</p><p>起来的时候，旅馆已经不在了，而我正躺在寸草不生的荒野上，灰黄色的土地一直延伸到地平线，旁边是背包，还有一堆木柴的余烬。</p><p>就像是小时候看的童话故事一样，旅馆消失了，一点存在的痕迹都没有。</p><p>我拍了拍脑袋，决定把这超自然现象归因为我昨天太累而产生的幻觉。不过这自欺欺人的说法并未持续多久，因为我在木柴的灰烬里找到了一张便条。</p><p>“向东走，有马工市场，相信我，你会需要一个的。”</p><p>说实话，我并不相信便条上的话，也不相信这种荒凉的地方会有马工市场。不过现在已经是无路可走的境地了，周围全是光秃秃，暗黄色的土地，完全没有什么可以拿来辨认的东西。也只好向东走，碰碰运气了。</p><p>没走多久，眼前便出现了热闹的集市，仿佛刚刚的不毛之地全是骗人的把戏一般。我踮起脚尖，在熙熙攘攘的人群中寻找着马工市场。找了半天才发现马工市场就在旁边，真傻。</p><p>我还是第一次进这种地方，以前从没出过远门，连马工是什么都还没怎么搞清楚。</p><p>我拨开门前的珠帘，进到了里面。屋里摆满了笼子，虽说是铁质的，看起来却很不结实。笼子里关的都是和我年纪差不多大的人，有男有女，有高有矮，有胖有瘦，有黑有白，不过无一例外都衣衫褴褛，带着长长的枷锁。笼子里的人看到我都觉得新鲜，好奇的打量着我，脸上都充满了活力。不过也有几个角落里的笼子眼神呆滞，默不作声。我第一次看到这种场景，尽力让惊讶不在脸上表现出来，我想着母亲和我说的话，尽可能的让自己接受。在母亲眼里，规则便是规则，不该被质疑，只按自己的喜好而行事的人只会成为世界的害虫，这也是我们家所信奉的理念。</p><p>回过神来，他们依旧盯着我，这让我有些不舒服。我快步上前，跟老板说明来意。</p><p>“我来买马工。”</p><p>老板是个骨瘦嶙峋的女人，长着一副精明的眼睛，仿佛时时刻刻都在打着算盘。她看着我，脸上堆满了笑容，朝我挥挥手，向四周快速的看了看，确定没人后，凑到我耳边，压低声音说。</p><p>“小伙子，你来对时候了。我这儿刚到了一个上等货，正要出手呢。”</p><p>我还没说话，老板就把我拽到了一个看起来像是仓库的地方。周围黑漆漆的，只有老板手电筒发出的光。有一种地下室独有的霉味，老板单手拿着手电筒，招呼着我赶快过去。手电筒照着的地方是一辆小货车，门没关，车里面都是笼子，有八九个。</p><p>“这批货可就活下来这一个啊，绝对的上等品，你真是走运了。”</p><p>老板边打开车里的灯，边挥舞着手说道。灯光是灰色的，照着车里的血泊，连反射的光都带着腥气。笼子里装满了一具具死尸，全身惨白，本该放着眼睛的地方空无一物，只剩下血淋淋的眼窝，姿势各不相同，在笼子里扭曲的躺着。大滴的汗珠从我的脸上滑落。老板回头看了看我。</p><p>“呦，吓到了？不过也难免，我第一次见到时也跟你一个反应。”</p><p>“嗯。”</p><p>“货是在路过雪原的时候被冻死的，我可是花了大价钱进的这批货，我把她们的眼睛挖出去卖了，想着能少亏点。”</p><p>老板摆弄着锁，继续说着。</p><p>“那眼睛真的很漂亮啊，像水晶一样，卖了个好价钱，到头来竟然没亏多少。”</p><p>“好了。”</p><p>老板把面前的箱子打开了。</p><p>“这可是这批里唯一活下来的。”</p><p>老板边说边拿手电筒向箱子里照去。</p><p>那是一个少女，头发如瀑布般倾垂而下，雪白的身体上没有一丝瑕疵，脸上却留着干透了的泪痕。</p><p>“看起来太娇嫩了，不像个干粗活的人是吧，不过我保证，她绝对是个称职的马工。”</p><p>老板拿小刀在少女的手臂上划了一道口子，鲜红的血就这样顺着白哲的皮肤流了下来。</p><p>少女惊醒了。</p><p>“痛痛痛。”</p><p>少女的表情明显的痛苦着，愤愤的看着我旁边的老板。又把目光转向我，好奇的上下打量着。我有些窘迫。少女歪着头，闭上眼睛，若有所思。</p><p>“你带我离开这儿吧。”</p><p>声音如同外表一般清脆，像是夜空中忽闪的星光。</p><p>她指着我，一副理所当然的样子。</p><p>“怎么样，精力足吧，绝对是好马工。”</p><p>“那当然，我力气大着呢。”</p><p>少女伸出手在空中画了个很大的圆，刚刚的伤口依旧滴着血，看起来很痛。少女眼泪汪汪，长长的睫毛扑闪着，似乎在等待着我的回答。</p><p>都已经看到那种东西了，不付钱看起来出不去啊，我看着老板手里的小刀想着。反正本来就是来买马工的，哪一个都一样嘛，我安慰自己，虽然我很怀疑那娇小的身体到底能扛多少货物。</p><p>“行，就她了。”</p><p>我指着少女，对老板说。</p><p>“好嘞，果然识货。”</p><p>老板满面笑容，像是中了彩票。少女看起来也很高兴，在箱子里跳来跳去，似乎忘记了伤口的存在，把血撒的到处都是。</p><p>看着老板的笑容，我愈发确定自己被骗了。付完钱，老板给了我一套破布衣服和一条锁链，我把衣服给了少女，让她穿上，锁链收在了包里。临走前，少女还转身给老板做了个鬼脸。而我一刻都不想多待，低着头快步走了出去。</p><p>“等等我啊。”</p><p>少女追了过来，手臂上的伤口依旧滴着血。</p><p>我正郁闷着，没心情搭理她。少女见我一直不搭理她，也就没再缠着我，只是默默的低着头，紧跟在我身后。</p><p>穿过乱糟糟的集市，我和身后的少女来到了一块跟之前差不多的荒野上。我找了块看起来还算干净的空地，坐了下来，少女见我坐了下来，看都没看就坐在了荒草堆上，一直睁大眼睛盯着我。</p><p>“我……”</p><p>“我叫缇娜。”</p><p>少女举手抢先说。</p><p>“啊，我叫莱克。”</p><p>“我们接下来要干什么呢？”</p><p>缇娜看起来有些期待。</p><p>看着眼前天真的少女，我有些后悔听了便条的话。原来马工是这么麻烦的东西吗？不过我也有错，不知道马工是什么就要去买，还被黑心老板骗走了身上的钱，结果只买回来了个看起来像是吉祥物的东西。正好趁现在好好问问她关于马工的事，至少得让她尽到马工的职责，如果有的话。</p><p>“马工是要做什么的呢？”</p><p>我似乎问了个很蠢的问题。</p><p>“啊，大概是要帮人拿拿行李的吧，我也不是很清楚诶。老板应该给了说明书的，我找找。”</p><p>缇娜翻着身上布衣的口袋，从右边口袋拿出来了一本小册子，应该就是说明书了。</p><p>“就是这个了，给你。”</p><p>我接过了小册子，上面写着马工使用说明，是本印刷册。我翻看着里面的内容。</p><p>“马工。如其名，是用来代替马的工具，盛产于马村，世界各地也多有生产，是世界主流的交通工具。”</p><p>这大概是马工的简介，我抬头看了看缇娜，她正在摆弄着我背包里的锁链，链条在少女的手中反射出冰冷的光线，看起来是当成玩具了。我把注意力放到小册子上，继续往下读。</p><p>“使用方法：使用者坐在马工背上，乘骑行态。可用前后左右，东西南北等方向词控制马工移动的方向，用快慢等速度词控制马工移动的速度。使用者还可使用配套的悬钩，将需要悬挂的行李及货物扎到马工的耳骨上，便于运输。以上是马工的使用方法。注意：请在悬挂货物后对马工的耳骨进行消毒处理，防止其溃烂，从而延长使用寿命。”</p><p>我看了看小册子，又看了看眼前名为缇娜的少女，尽力想要适应新的规则，却无论如何也想象不出那样的景象。眼前的缇娜正举着锁链，伸着头，想要把锁链套到头上去。</p><p>“呀，好凉。”</p><p>缇娜的脸刚沾到锁链，便缩了回来。似乎是感受到了我的目光，意识到我已经把说明书看完了，她把手伸了过来。</p><p>“我也要看，我也要看。”</p><p>缇娜把册子夺了过去，自己认真看了起来。不过从她的反应来看，缇娜似乎不认识字，只能看懂上面的几张示意图，仅仅是这样，她还是大声抱怨了起来。</p><p>“马工也太惨了吧，这么累，要在地上爬，背着人，还得被扎钉子。”</p><p>虽说不认识字，不过理解的还是很快。我隐约感到我不擅长应付的情况要出现了。</p><p>“莱克，我能换个工作吗？”</p><p>我怔住了。</p><p>似曾相识的话语让我有些不知所措。很久之前，也有人对我说过这句话，那个人是我的妹妹。在我的记忆里，妹妹一直是个活泼的女孩子，走路都是蹦蹦跳跳的，脸上总是洋溢着笑容，对我也总是哥哥的叫着，很亲昵，我也很珍惜她。而在妹妹七岁接受家族的工作之后，却变得沉默寡言，失去了昔日的活力，连眼神也变得空洞了，终日呆在母亲的房间里。直到有天妹妹很兴奋的跑过来找我，问出了和现在的缇娜一样的话。我却让她去寻问母亲。然后，我眼睁睁的看着面前的妹妹倒在了血泊中，手里还握着从口袋中掏出来的水果刀，刚刚强撑着的活力，也变得冰冷起来。在那之后，母亲就接手了我的教育。</p><p>见我一直愣着不说话，缇娜伸手摇了摇我。我从痛苦的回忆中回过神来。看着面前眼睛湿润的少女，一瞬间竟和妹妹的身影有些重合。</p><p>“好啊，那你就和我做一样的职业吧。”</p><p>我尽可能的露出最温柔的笑容，对她说。</p><p>“太好了，耳朵不用被扎钉子了，谢谢你，莱克。”</p><p>缇娜跳了起来，庆祝着。我看着她，把锁链又重新收到了包里。</p><p>我坐在地上，看着缇娜舞蹈，长发在空中划出活泼的弧线，她的快乐似乎要溢出来了似的，却让我有些悲伤，心里希望母亲和妹妹能原谅我的放肆。</p><p>缇娜似乎也跳累了，又坐在了荒草堆上，汗水浸湿了本就单薄的旧衣服，前额的发丝也有几根贴在了额头上，看着有些好笑。</p><p>我故意冲着她笑，眼角还有些抽搐。</p><p>“你笑什么，我身上有什么怪东西吗？”</p><p>缇娜急忙往自己身上看，这摸摸，那瞧瞧。边看还边自言自语。</p><p>“咦，没有啊。”</p><p>缇娜略显滑稽的样子冲散了我那有些廉价的悲伤，我忍不住大笑了起来。</p><p>缇娜看到我捧着肚子大笑，先是楞了一下，随后像青蛙一样鼓起了嘴，气呼呼的看着我。</p><p>“莱克耍我，太坏了。”</p><p>我还在笑着，泪水从眼角滑落。母亲常说泪水有两种，一种是悲伤的，一种是喜悦的。我这毫无疑问是喜悦的泪水，可鼻头却有些发酸。泪水让眼前的少女模糊不清，妹妹却乘机跑到了眼前，和少女的身影重叠起来。喉咙有些哽咽，泪水最终还是掩盖了笑容。</p><p>我在少女面前哭了起来。</p><p>少女身体独有的柔软触感包裹着我，缇娜正紧紧的抱着我。我哭的有些丢脸，缇娜轻抚着我的头发，安慰着我。雨不合时宜的下着，打在我和缇娜的身上，溅起点点水花，水珠从她的脸颊滑落，留下泪痕。她就这样在雨中抱着我，一言不发。</p><p>我们并肩走在路上，雨已经停了好一会儿了。她背着包，脸颊有些微红。我也感觉有些尴尬。</p><p>缇娜忽然停住脚步，拍了拍脸，似乎是要赶走这不愉快的气氛似的。</p><p>“接下来去哪？莱克。”</p><p>她故意说的很大声。</p><p>说实话，我也不知道接下来该去哪，让一个从不出远门的人找路简直是强人所难。我只知道目的地是一个叫天堂镇的地方，是总统居住的地方。其它的什么路线啦，具体方位啦，我是一概不知道。我承认自己的鲁莽。准备向缇娜问问看。</p><p>“缇娜，你知道天堂镇吗？”</p><p>我试探性的问道。</p><p>“什么吗，早说啊。天堂镇离我以前呆的地方很近的，很熟很熟。”</p><p>缇娜拍着胸脯，信誓旦旦的说。</p><p>“那你带路吧，我不知道路。”</p><p>抓住这个机会，我把带路的重任交给了缇娜。</p><p>“包在我身上。”</p><p>缇娜挠着头，向四周看去，眉头皱着，似乎在努力思考些什么。</p><p>“嗯…我想想，应该是这个方向没错了。”</p><p>缇娜指着我背后的方向。</p><p>“你走反了啊，笨蛋莱克。”</p><p>我无视了她在我名字前加的前缀，向她指的方向走去。</p><p>缇娜还留在原地，还在思考着什么。</p><p>“我们刚刚走的方向是去哪的来着？…好像是叫…世界尽头吧。哇，这名字好酷。”</p><p>“喂，莱克，我们去世界尽头看看吧。”</p><p>缇娜指着我们刚刚走的方向，朝这边喊道。</p><p>“我的目的地是天堂镇，不是那边。”</p><p>“切，小气鬼。”</p><p>缇娜又鼓起了脸，气呼呼的说道。</p><p>缇娜跑到我身边，冲我做了个鬼脸。我装作没看见，继续赶着路。</p><p>缇娜脸上的笑容消失了，一眼不发的跟着我。我有些后悔，连带着我的心情也变得忧郁。明明平时那么活泼，却总在这种时候变得敏感，真是个怪人。</p><p>不一会儿，我们就走到了之前的集市。相比于上午，下午的集市显得有些冷清，摊子大部分都收起来了，只剩下几个药摊，似乎还在等待客人。</p><p>“冰糖葫芦，我要吃冰糖葫芦。”</p><p>沉默了许久的缇娜刚说出这句话，立马用手捂住了嘴巴。</p><p>我看着她那有些滑稽的样子，忍不住发笑。</p><p>缇娜依旧低着头。</p><p>我从背包里翻出钱包，被老板骗了后，钱也所剩无几了。只剩下一张一百的和一张五十的纸币，外加几枚硬币。我看着低头不说话的缇娜，还是决定买了一个。</p><p>卖糖葫芦的老奶奶看起来很开心，给我多加了一层米衣。我把糖葫芦递给缇娜，缇娜的眼神刚开始竞显得怯生生的，不过接过了糖葫芦之后，似乎一下子就恢复到了之前的状态，脸上挂着活泼的笑容，还有两道未干的泪痕。</p><p>缇娜三下五除二就把冰糖葫芦吃完了，看起来很开心。我和缇娜准备去旁边的酒馆看看，瞧瞧能不能打听到什么。毕竟让两个没有常识的人在外面走那么远的路还是有些强人所难了。</p><p>我和缇娜走进了酒馆，一进门便是扑鼻的酒香，比外面冷冰冰的空气舒服多了。我在柜台前坐下，点了两杯最便宜的酒。旁边的服务员很快就把酒递了过来，我一边小口抿着酒，一边观察着店里得到人，想着到底该问些什么。缇娜坐在我旁边，嚷嚷着要喝点酒试试，我把另外一杯递给她，她一口气喝完了一整杯。旁边的服务员诧异的看着我和缇娜。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 创作 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 微小说 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>夜间起舞</title>
+      <link href="/posts/19866/"/>
+      <url>/posts/19866/</url>
+      
+        <content type="html"><![CDATA[<div class="aplayer" data-id="868493" data-server="netease" data-type="song" data-mode="single"></div><p>拿上钥匙，手机和防狼喷雾，我就这样向夜间出发。<br>在黑夜中戴上耳机，放上属于黑夜的歌。</p><p>就这样走在灯光璀璨却空无一人的街道，随着耳机中的脚步声，一步一步的走着。<br>狭窄的小道和两侧紧贴着的灯光，通向我想去的地方。<br>蛛丝一根根的黏上我，就这样黏着吧，我也懒得扯断。<br>到转角口了，是走前面的路，还是走身后的路呢。<br>我随着歌声向前迈出脚，蝉鸣声从远处传来，潮湿的空气让我难以呼吸。</p><p>就这样跟随歌声而行。</p><p>我们在夜间排成一路纵队，随着音乐起舞。<br>乌鸦叼起灯光，扑腾着黑色的羽毛，慢慢的躺在路中间，任人踩踏。<br>猫咪扑杀新的我，让街道不那么拥挤。<br>我在队前起舞，踩着黑色的羽毛，伴着蝉鸣，供后面的人观赏。</p><p>而我跟随着脚步声回到了家，喝了杯牛奶，打开电脑，嘴里留着牛奶的酸味，记录下这一夜。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 随笔 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>如何在Windows上畅玩《混沌之子Love亲☆亲》汉化版</title>
+      <link href="/posts/10007/"/>
+      <url>/posts/10007/</url>
+      
+        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近用psv模拟器推完了《混沌之子Love亲☆亲!!》，记一些教程和避坑点。</p><h2 id="Ⅰ-准备"><a href="#Ⅰ-准备" class="headerlink" title="Ⅰ.准备"></a>Ⅰ.准备</h2><ul><li><p>一台装有Windows系统的电脑（本文以Win10为例）</p></li><li><p>Vita3K（psv模拟器）</p></li><li><p>系统固件及字体固件</p></li><li><p>《混沌之子Love亲☆亲!!》安装包及汉化补丁</p></li><li><p>一些耐心</p><p>  ps：本文提供系统固件及字体固件和《混沌之子Love亲☆亲!!》安装包及汉化补丁，解压码为<code>Sperte</code></p>  <a class="btn-beautify " href="https://pan.baidu.com/s/1XA6VF45hCRq635iy1_ZP6Q"   title="百度网盘（提取码：2333）"><span>百度网盘（提取码：2333）</span></a>  <a class="btn-beautify " href="https://www.aliyundrive.com/s/X2JwVHnhJeT"   title="阿里云盘（提取码：2333）"><span>阿里云盘（提取码：2333）</span></a></li></ul><h2 id="Ⅱ-安装并配置Vita3K"><a href="#Ⅱ-安装并配置Vita3K" class="headerlink" title="Ⅱ.安装并配置Vita3K"></a>Ⅱ.安装并配置Vita3K</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><a class="btn-beautify " href="https://vita3k.org/"   title="Vita3K官网"><span>Vita3K官网</span></a><a class="btn-beautify " href="https://github.com/Vita3K/Vita3K"   title="Github"><span>Github</span></a><a class="btn-beautify " href="https://wwp.lanzouf.com/b01vlymdi"   title="蓝奏云（提取码：bhte）"><span>蓝奏云（提取码：bhte）</span></a><p>ps:请自行选择合适的方式下载</p><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ol><li><p>在合适的位置解压上一步下载得到的压缩包</p></li><li><p>双击打开Vita3K.exe</p><p> <img src="https://unpkg.com/sperte-img@latest/picgo/Snipaste_2022-07-20_11-48-43.webp" alt="安装1"></p></li><li><p>选择语言</p><p> <img src="https://unpkg.com/sperte-img@latest/picgo/Snipaste_2022-07-20_11-54-46.webp" alt="安装2"></p></li><li><p>选择存放路径（建议更换到非系统盘）</p><p> <img src="https://unpkg.com/sperte-img@latest/picgo/Snipaste_2022-07-20_11-56-21.webp" alt="安装3"></p></li><li><p>安装系统固件及字体固件<br> <img src="https://unpkg.com/sperte-img@latest/picgo/Snipaste_2022-07-20_11-58-39.webp" alt="安装4"><br> 选择之前下载的两个固件并安装<br> 两个固件都已安装且显示 V 就可以点Next继续</p></li><li><p>一路Next</p></li><li><p>安装完成</p></li></ol><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ol><li><p>新建用户<br> <img src="https://unpkg.com/sperte-img@latest/picgo/Snipaste_2022-07-20_12-04-33.webp" alt="配置1"></p></li><li><p>登录刚刚创建的用户<br> <img src="https://unpkg.com/sperte-img@latest/picgo/Snipaste_2022-07-20_12-05-51.webp" alt="配置2"></p></li><li><p>配置完成</p></li></ol><h2 id="Ⅲ-安装游戏及汉化补丁"><a href="#Ⅲ-安装游戏及汉化补丁" class="headerlink" title="Ⅲ.安装游戏及汉化补丁"></a>Ⅲ.安装游戏及汉化补丁</h2><h3 id="安装游戏"><a href="#安装游戏" class="headerlink" title="安装游戏"></a>安装游戏</h3><ol><li><p>在文件选项卡中点击安装zip<br> <img src="https://unpkg.com/sperte-img@latest/picgo/Snipaste_2022-07-20_12-08-02.webp" alt="游戏1"></p></li><li><p>点击Select File并在弹出的界面选择下载的安装包<br> <img src="https://unpkg.com/sperte-img@latest/picgo/Snipaste_2022-07-20_12-11-37.webp" alt="游戏2"></p></li><li><p>安装完成<br> <img src="https://unpkg.com/sperte-img@latest/picgo/Snipaste_2022-07-20_12-31-04.webp" alt="游戏3"><br> <img src="https://unpkg.com/sperte-img@latest/picgo/Snipaste_2022-07-20_12-31-09.webp" alt="游戏4"></p></li></ol><h3 id="安装汉化补丁"><a href="#安装汉化补丁" class="headerlink" title="安装汉化补丁"></a>安装汉化补丁</h3><ol><li><p>右键游戏图标并打开应用程序文件夹<br> <img src="https://unpkg.com/sperte-img@latest/picgo/Snipaste_2022-07-20_12-32-39.webp" alt="汉化1"></p></li><li><p>将汉化包覆盖上去</p></li><li><p>汉化完成</p></li></ol><h2 id="Ⅳ-游玩注意事项"><a href="#Ⅳ-游玩注意事项" class="headerlink" title="Ⅳ.游玩注意事项"></a>Ⅳ.游玩注意事项</h2><ol><li><p>键位操作<br> <code>c</code>键为<code>确定</code>键<br> <code>x</code>键为<code>返回</code>键<br> <code>e</code>键为<code>快进</code>键<br> <code>q</code>键为<code>强制快进</code>键<br> <code>v</code>键为<code>文本回看</code>键<br> <code>j</code>键为<code>积极妄想</code>键<br> <code>l</code>键为<code>消极妄想</code>键<br> <code>enter</code>键为<code>菜单</code>键</p></li><li><p>闪退相关</p><ul><li>在游戏最开始的推理环节中，大概率会爆内存闪退，建议强制快进至推理环节结束</li><li>在游戏过程中，大概15分钟左右会闪退一次，建议每隔10分钟存一次档</li><li>闪退后，请强制快进过之前的闪退点，避免再次闪退</li></ul></li><li><p>其它</p><ul><li>游戏过程中会出现配音及音效重复现象，应该是模拟器的原因，暂时无解，不过影响不大</li></ul></li></ol><h2 id="后言"><a href="#后言" class="headerlink" title="后言"></a>后言</h2><p>请大家在推完后一起和我大喊，RNM！梅原</p><details class="toggle" style="border: 1px solid #A4D8FA"><summary class="toggle-button" style="background-color: #A4D8FA;">文章引用</summary><div class="toggle-content"><p><a href="http://c.tieba.baidu.com/p/7297379540?fr=good">DP复刻大佬的汉化补丁发布贴</a></p></div></details>]]></content>
+      
+      
+      <categories>
+          
+          <category> 经验 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 教程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>窒息后的拥抱</title>
+      <link href="/posts/24359/"/>
+      <url>/posts/24359/</url>
+      
+        <content type="html"><![CDATA[<div class="aplayer" data-id="26521418" data-server="netease" data-type="song" data-mode="single"></div><details class="toggle" style="border: 1px solid #A4D8FA"><summary class="toggle-button" style="background-color: #A4D8FA;">前言</summary><div class="toggle-content"><p>昨天晚上熬夜看完了《爱的曝光》，做了一个梦，记录一下。</p></div></details><p>我在寻找着洋子。</p><p>我在校园中奔跑着，不安的奔跑着，浑身脱力，仿佛在海洋中滑动海水，手脚发软。即便如此，我依旧奔跑着，为了找到洋子，并向她诉说我的一切。</p><p>我已经不记得我推开了多少扇门，接受了多少鄙夷，恶心的目光。仅仅因为我是个彻头彻尾的变态，一个无可救药的罪人吗。</p><p>胃里的消化物在翻腾，呕吐感逐渐上涌。我依旧奔跑着，呕吐物迎风扑在我的脸上，酸臭胃液带来的灼烧感并没有侵蚀我的信念，大脑中只剩下我的玛利亚。</p><p>“优，我们找到洋子了，就在三楼的五班门口，正在进教室。”一直通着的电话传出来上帝的救赎之音。</p><p>我抬头望去，泪水，汗水让我的视线变得模糊，可我的视线依旧捕捉到了她，神圣的玛利亚。</p><p>我尽全力的奔跑着，风将我脸上的异物吹去，周围的人在向我喝彩，所有人都在为我加油打气。我跑上了三楼，上课铃响了，可所有人都在站着，在呼喊我的名字。</p><p>大家真是好人。</p><p>我向教室内奔去，人们的目光聚焦在我身上，洋子与我对视了，仅仅是一瞬间，她的脸庞变得扭曲，眼神里充满了惊恐，她摇着头向后退去。</p><p>周围的人在鼓掌喝彩，在催促着我。</p><p>我跑过优和洋子之间的距离。</p><p>我伸开了双臂，将流着泪的她紧紧的拥入怀中。</p><p>洋子想要推开我，我没有松开，而是用尽全力拥抱着洋子，她望向我，我和她的泪水都不住的流淌着。我们紧紧相拥，感受着彼此的温暖。</p><p>所有人都在为我们喝彩，只有我和洋子在放声大哭，流下混杂着红色血液的，真正的泪水。</p><details class="toggle" style="border: 1px solid #A4D8FA"><summary class="toggle-button" style="background-color: #A4D8FA;">后言</summary><div class="toggle-content"><p>今天<del>早上</del>中午起床后感觉头懵懵的，大家要珍爱生命远离熬夜啊。</p></div></details>]]></content>
+      
+      
+      <categories>
+          
+          <category> 创作 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 随笔 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>下雨小记</title>
+      <link href="/posts/50235/"/>
+      <url>/posts/50235/</url>
+      
+        <content type="html"><![CDATA[<p>变天了。</p><p>雨把树都吹歪了，屋里的电灯也一闪一闪的，风声和雨声盖过了耳机里的歌声，从楼上垂下的电线也摇摇摆摆的。</p><p>我打开了窗户，探出头去，深海的浪花一朵接着一朵，鸣笛声，树叶声，流水声，全都通过海水中的缝隙传达到我的耳中，沉闷且燥热。猫也探头出去，好奇的钻进海水，前半身在海水中，后半身在我视线所能到达的空气里。海水似乎把电力系统打坏了，屋里的灯灭了，吃一半的面也要冷了，我关上窗户，重新回到黑暗中，慢条斯理的吃完了碗里的面，把碗摆好，没脱衣服便躺在床上，就这样睡着吧。没有光的下雨天，正是闭眼的好天气。</p><p>希望我和她都不会被浪花卷走。</p><p>猫还趴在窗边，看着世界摇曳。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 随笔 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>6月30日 星期四 原味薯片</title>
+      <link href="/posts/20203/"/>
+      <url>/posts/20203/</url>
+      
+        <content type="html"><![CDATA[<p>好消息，期末终于考完了。坏消息，没有暑假。嘛，疫情加准高三这两个要素凑一起，没暑假也是意料之中。至少给放了两天假，我真是感恩戴德。</p><p>最近玩了混沌之子，很棒的游戏，除了万恶的TE，于是我在考完试那天下午为自己做了个新的结局，以填补残念。本来是想用Renpy做的，奈何败在了懒癌的手上，最后还是用回了NVLMaker，下次一定。</p><p>刚刚把素晴日的剧场版红传说给补了，真不错，依旧是我看过的动漫里最有异世界生活感的作品。</p><p>OK，byening~</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>6月19日 星期天 融化了的巧克力</title>
+      <link href="/posts/38282/"/>
+      <url>/posts/38282/</url>
+      
+        <content type="html"><![CDATA[<p>啊~好久没写日记力，趁着推gal跳过已读文本的时间来水一水好了。</p><p>回过神来发现已经开学一周多了，也回到了校园苦逼生活的节奏中。不过大家比之前卷的更厉害了，头大。不过从悠闲的网课换到苦逼的校园生活，还是有些难顶的。</p><p>尼玛，校园生活果然没什么好写的，平淡又无趣，日复一日，像是永无止境的循环。不过最近倒是多了个人陪我，虽然还很稚嫩，但至少不会像以前那样了。</p><p>就写到这吧，专心推gal了。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>5月29日 星期天 冰块与糖</title>
+      <link href="/posts/31466/"/>
+      <url>/posts/31466/</url>
+      
+        <content type="html"><![CDATA[<p>冰阔乐在夏天真是个好东西啊，解暑，解乏，解口渴，解除封印(。</p><p>昨天调休去学校给高三学哥学姐收拾考场，时隔几个月来着，记不清了，反正就是隔了好久，再一次来到熟悉的校园，见到了久别的同学和老师，心中并没有什么波澜。大家还像以前一样，三两成群，有说有笑。本来是要打扫卫生的，一开始大家倒是有模有样，不出十分钟，我就在座位上边聊天边玩手机了，毕竟摸鱼还是要摸的。</p><p>没啥想记的了，溜了。<br>智障女神要出第三季了，过年预备。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>5月24日 星期二 闲来无事</title>
+      <link href="/posts/55651/"/>
+      <url>/posts/55651/</url>
+      
+        <content type="html"><![CDATA[<p>今天的事情都完成了，然而才十一点出头，不想睡，于是水篇日记先。</p><p>水什么呢，想到什么水什么吧。本人的论坛最近第一次出现广告贴，于是我高高兴兴的把广告哥给封了，没想到我的小论坛竟然还能招到广告哥。不过事情还没完，广告哥今天一天出现了两次，这我就不高兴了，于是我把发帖权限提了提。大成功。</p><p>看群友折腾linux加win双系统，手痒痒，还好爆红的硬盘空间即使阻止了我，要不我又该瞎折腾了。不过折腾还是会折腾的，等买了新电脑再说罢，mark住了。</p><p>夏天的蚊子是真的多，抓不完的那种，什么时候才有人发明出便携式蚊子餐馆啊，我给你一管血，你还我个清净的夏天好咩，球球了。而且到了夏天，锻炼时出的汗也多了，不好受啊，下次开空调锻炼罢。</p><p>我发现我的猫脱发很严重，一揪就是一大把，比他狗修金还能掉，是不是随我啊，www。</p><p>有点困了，虽然每天都是睡眠不足，但仍然不想早睡，这是为什么呢，大概是懒得从椅子上站起来然后再躺到床上吧。</p><p>突然想起来，之前日记里说好的文章还没写呢，嘛，先咕着罢，反正也没人看。</p><p>差不多到点了，睡觉去咯。<br>最后祝福世界上每个蚊子都有一个属于自己的，温暖的家，别来我家串门了好吗，不欢迎！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>深蓝色的陪伴</title>
+      <link href="/posts/48374/"/>
+      <url>/posts/48374/</url>
+      
+        <content type="html"><![CDATA[<p>你是只属于夜晚的向日葵，<br>一株深蓝色的向日葵。</p><p>你接纳每一个夜晚，<br>不管是如月光映衬少女般皎洁，<br>还是像蛆虫啃食淤泥般肮脏，<br>你总是祝福着每种颜色。</p><p>你接纳每一朵花，<br>总是耐心的为他们洗去尘土，<br>洗去痛苦与悲伤，耻辱与不堪，<br>洗去欢喜与感动，快乐与童真，<br>拥抱他们，只留下漫无边际的幸福。</p><p>你接纳每一个我，<br>轻抚着我的每一寸肌肤，<br>从肉体到灵魂，<br>从花开到花谢，<br>都只剩下向日葵淡淡的香气。</p><p>愿我在你深蓝色的怀抱中，<br>永恒的下沉，<br>直到与你相拥。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 创作 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 诗 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>5月18日 星期三 橙味芬达</title>
+      <link href="/posts/32451/"/>
+      <url>/posts/32451/</url>
+      
+        <content type="html"><![CDATA[<p>先说一个坏消息，前两天jsd挂了，导致本站和我的仓库站大部分静态资源在国内处于无法访问状态，实在是让人头秃。</p><p>再说两个好消息，一个好消息是我把本站的静态资源迁到了NPM和Tianli佬搭建的jsd镜像上了，恢复了访问，因为NPM有国内节点而Tianli佬的服务又是搭在腾讯云上的，本站的访问速度大大提升。我还顺带把所有图片都换成了webp格式。</p><p>第二个好消息就是本人所在的十八线城市终于解封了，还记得解封的零点整个城市都是鞭炮声和尖叫声，没想到在2022年能看到这么魔幻的情景，感慨良多。由于本人的懒狗属性，并未在解封的第一时间去买可乐，于是可乐就没了，我今天去买可乐的时候它就没了！可超市来都来了，总不能空手而归吧，抱着这样的念头，我就买了一瓶橙味芬达和青苹果味美年达。当我到家喝下第一口芬达的时候我就后悔了，不合我的口味，然后我就陷入了对可口可乐的深沉思念。</p><p>其实还有一个好消息，那就是我上周要更新的计划表没有咕咕咕，我把健身的时间增加了些，毕竟强身健体还是很重要的。也把英语的学习提上了日程，因为本人英语实在是太烂了。</p><p>青苹果味的美年达还是不错的，我要好好考虑怎么处置那瓶芬达了。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>茶馆与少女</title>
+      <link href="/posts/46456/"/>
+      <url>/posts/46456/</url>
+      
+        <content type="html"><![CDATA[<p>一位衣冠整洁的少女，</p><p>含苞待放却不敢走出庭院，</p><p>愿她永远纯洁如初,不受世俗的纷扰,</p><p>至少在生命还未凋谢的时候。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 创作 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 诗 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>绿色的泪水</title>
+      <link href="/posts/50928/"/>
+      <url>/posts/50928/</url>
+      
+        <content type="html"><![CDATA[<p>茶馆的午后总是让人感到燥热，空气也中弥漫着一股酸臭味儿，无处不在的蚊虫更是让拉尔感到不耐烦，他掸了掸呢大衣上的碎片，站起身来，从茶馆走了出去。外面热浪滚滚，就像白天的工作间一样让人不舒服，拉尔挺了挺因久坐而酸胀的腰，快步向前走去，他边走边创造了一个有冷气的房间，来缓解自己工作一天的疲劳，白色的房间里空无一物，只有不知从何处吹来的冷气，拉尔实在没精力再去创造些可有可无的了，他只想吹吹冷气。他在地板上静静的坐着，享受着工作时没有的冷气，舒适的环境让拉尔萌生了困意，设备也在这时发出了警报，似乎监测到了他的睡意，不能在这里睡觉似乎是药品为数不多的副作用，于是他迅速地拔下了针管，随之而来的晕眩让眼前的景象变得模糊起来，拉尔不喜欢看这些东西，他闭上了双眼，直到家中向日葵的香气唤醒了他。</p><p>拉尔摘掉设备，走到供水口给自己倒了杯温水，最多也就是温水，让天街的供水系统提供热水似乎有些强人所难，这里的一切都以维持最基本的生命机能为目的，至于其它的事情，药品支撑了其它的一切，它可以给所有人想要的任何东西，人们在天街中生存，在幻境中生活。拉尔把水喝了个精光，然后把药品和设备整齐的收拾在箱子里，箱子是治安委员会把拉尔从地面救上来时发的，上面还刻着拉尔的绝对编号，质量很好，几年来也没有什么磨损。这样想着，拉尔的眼皮有些睁不开了，他懒得再躺到床上，就这样抱着箱子睡着了，一直到闹钟执行的时候。</p><p>大脑前额叶的刺痛感让拉尔被迫睁开了眼，清晨的阳光让他觉得有些犯恶心，他打开了录音机，录音机在天街并不常见，因为人们不需要，自然也不会去制造，这台是一个朋友送给他的，他边注射营养剂边回想着录音机里的那首歌，那是一位歌手在事故发生后的一年里创作的，名字叫《timero》，是一首很舒缓的歌曲，有种摇篮曲的感觉。时间差不多了，拉尔起身到供水口冲了把脸，锁上箱子便出了门，他每次出门前总得做几个深呼吸，以保证自己的恐高症不会发作。他穿过街道，小跑到了电梯口，免得迟到。拉尔在113号设施上班，他不知道这座设施是什么用途，只知道自己每天只要维护下设施的运输系统就能完成工作，还不算太坏。“你已经到达一级设施 编号113 请验证身份”，冰冷的机械合成音从电梯的扬声器里传出来，他把额头对准扫描仪，过了一会，电梯门就打开了，“欢迎你，编号2769，工作愉快”，拉尔从电梯门走出去，正巧，隔壁的电梯门也打开了，是位长发女子，是他印象中为数不多的能在白天保持活力的人，不过拉尔并不想在白天耗费无意义的精力，于是没打招呼便离开了。</p><p>拉尔的工作既枯燥又乏味，大部分时间只是坐在椅子上，可他前额叶里的那个小东西不允许他离开座位，拉尔曾亲眼看到它活跃起来会怎么样，那个小东西似乎有它想维持的秩序。运输垃圾的吊车经常从拉尔的窗前经过，它总是把针头针管粗暴的往地面上扔，几乎要把整个地面都覆盖住了。“哟，拉尔，你来的也太早了吧。”，男子的声音打断了拉尔的思考，是泰姆，就在拉尔隔壁的工位，他今天又迟到了，奇怪的是，他脑袋里的小东西似乎对泰姆不感冒，拉尔在设施论坛里听说他在黑市做了手术，不过拉尔并不在乎这些事。“昨天晚上又去哪儿了，是太空探险，还是地心游记？”，这是泰姆的经典话题，他似乎对别人在晚上做了什么很感兴趣。“没什么新鲜的，昨天在茶馆里喝了几杯茶，又去吹了吹冷气。”，“冷气？冷气可是个好东西啊，可惜113没有，不过房间里的供水口倒是有冷水浴。”，“说实话，挺冷的。”，“供水系统烧不来热水嘛，当然是冷的咯。”，“我是说你这个笑话挺冷的。”，“额，那倒是。”，泰姆时不时就会进行这样的对话，至少能让白天的时间不再那么难熬，拉尔还是挺乐意听他唠叨的。</p><p>拉尔抬手看了看表，已经6点了，他在座椅上伸了伸懒腰，“编号2769，请领取你的物品。”，一个配有扬声器的小型运输车到了拉尔的面前，提醒他取走物品，是一管绿色的药水，每天定时发放，这就是所有人工作的目的，人们凭借它进入自己想要的夜晚。“走了，哥们儿，明天见。”，泰姆向我打了个招呼，设施里的人总是奔跑着回家，泰姆也不例外，不一会儿，113设施已经没几个人了，只剩几盏灯还在亮着，拉尔收拾了自己的桌面后也走到了电梯口，正碰上了克米尔，不过她似乎心情不太好，手里拿着几个文件袋，朝拉尔苦笑了一下，拉尔朝她点了点头，走进了隔壁的电梯。</p><p>回房间的电梯要比来的时候复杂得多，要在几百条历史记录里找到自己的那条，才能按原路返回。历史记录偏偏就是不增加一个检索的功能。电梯的周围是透明的，可以清楚的看到外面的情况，不过拉尔一般不会向下看，因为电梯是在高空中行驶的。他向四周看了看，隔壁电梯里的一个男子还没到家就注射了药品，手里拿着什么东西在四处挥舞，面部狰狞，嘴里似乎念念有词。这让他想起了泰姆曾和他说过的笑话，一个人在街上注射了药品后当众脱光了衣服，这事让泰姆整整笑了三天，拉尔就这样想着，“欢迎回到房间，编号2769，请遵守你所在辖区的规定。”，电梯到站了，拉尔到现在也不知道辖区到底有什么规定。他走出了电梯，往自己的房间中走过去，街上的行人已经很稀少了，不过倒是有很多从不同房间里发出的怪叫，泰姆把它称之为“生命的发情”，拉尔很认同这个说法，他正要打开房间门时，一声惨叫从很近的地方传了过来，拉尔的脸上突然有股湿热的感觉，铁锈味钻进了拉尔的鼻腔，令人作呕，他转头看了看惨叫发出的方向，长发男子手里拿着一把长刀，发疯似的像四周的人砍去，男子眼睛里还冒着绿光，那是注射药品后的特征，不很稀奇，这种药物失控事件经常发生，不过拿着长刀砍人的拉尔倒是第一次看见，没什么意思，拉尔走进了自己的房间。</p><p>他还没想好今天晚上要去哪，要创造些什么，在此之前，他先去供水口喝了杯温水，温热的触感让他决定去记忆中的地面看看，他打开箱子，戴上了设备，说是设备，其实就是用来固定注射者的架子，以免发生今天街上的情况，还有一个报警器，以免注射者在幻境中睡着，毕竟人口在事故后已经锐减到3万人了，自然是要加以保护的。拉尔把注射器扎进了自己的手臂，闭上了眼睛，药品让身体有种奇怪的悬空感，过了一会儿，拉尔所期望的景象逐渐清晰了起来，是事故还未发生时的地面，他在自己的家中，这让拉尔有种久违的亲切感，是在天街未曾有过的，拉尔每走一步，景象也会跟着畸变，他对地面的记忆并不是很清晰，但这对拉尔来说已经足够了。他很庆幸自己没有听泰姆的去什么太空探险，他见到了自己的母亲，拉尔变成了小婴儿，他躺在母亲的怀里听着摇篮曲，曲子很熟悉，就是拉尔早上听的那首，拉尔感觉一股寒气从脊背往上涌，这首歌的旋律不该在这儿出现，拉尔祈祷是自己的记忆出了问题。不过母亲的声音很快就让拉尔平静了下来，他慢慢的入睡了。在睡梦中，拉尔隐隐约约的看到，母亲的眼里流淌着绿色的泪水，和长发男子一样的，令人悲哀的泪水。</p><p>泪水从针尖滴落，在拉尔半闭的眼睛中，染红了周围的向日葵。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 创作 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 微小说 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>5月12日 星期四 期待星期天</title>
+      <link href="/posts/50791/"/>
+      <url>/posts/50791/</url>
+      
+        <content type="html"><![CDATA[<p>星期四是个特殊的日子，因为它很接近星期天（bushi。本来说要在昨天更新一下计划表来着，结果还是照着我的优良传统，拖延到星期天了。不过回想一下，本人似乎经常在星期天做出一些大大小小的改变，可能因为本人是学生的原因，似乎对星期的轮回比较感冒，毕竟星期一还是很恐怖的。于是，我以充分的理由，把计划拖到了星期天。。。</p><p>最近的听歌口味有些变，以前的歌单是清一色的二次元，前几天网易云给我推了一首粤语歌，歌名叫《遥远的她》，听完果断红心，然后发现华语还是有很多好歌的，只是以前没发现罢了，现在我耳机里放的就是这首歌。</p><p>觉醒了奇怪的爱好，躺在电脑椅上听歌睡觉，有种奇怪的舒适感，或许是我的电脑椅比较有安全感吧，很燃的歌也能入睡。</p><p>这样写日记好奇怪啊，有点像跟别人聊天，不过感觉还不错，还能水一篇文章。</p><p>哦，对了，期待星期天还有一个原因，那就是因为星期天《间谍过家家》更新啊，周指活了已经。<br>我去找图图，溜了溜了。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>5月11日 星期三 一杯温白开</title>
+      <link href="/posts/64859/"/>
+      <url>/posts/64859/</url>
+      
+        <content type="html"><![CDATA[<p>第一次在网上写日记，没想到是记那么无聊的一天，就像标题里的，今天就像一杯温白开，让人喝的不很舒服。</p><p>这段时间一直在倒腾博客，也就是现在这个站点，可以说是反反复复了，博客框架从typecho换到了wordpress，再到现在的hexo。每个框架主题也换了不少，终于在前几天定型了，按理说该是激动人心的事情，在定型的那天倒也确实如此。可完成之后才发现，建博客似乎花了我不少时间，也打乱了我以前的生活节奏，当博客不再花费我这么多的时间后，似乎有好多时间都空了下来，有些无所适从。不知道该找点什么别的干干，可能我真的很闲吧，毕竟是网课时期。</p><p>以前上学的时候倒是会抱怨时间不够用，可到了网课，许多时间倒拿来看番，刷论坛了。是时候更新一下我的计划表了，无所事事可不是什么好兆头，说到计划表，我计划表一直是放在微软ToDo上的，很不错的软件，下次写篇推荐文。</p><p>溜了溜了，该写作业去了，写完作业还得更新一下计划表呢，希望明天别再是温白开了，夏天了，还是冰水来的爽快。哦，对了，我还得新建个分类呢。草，还得配张图。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Butterfly主题美化笔记</title>
+      <link href="/posts/40304/"/>
+      <url>/posts/40304/</url>
+      
+        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>记录一下我的主题魔改历程，便于以后修改。<br>美化不涉及主题源码，只涉及插件和css挂载。</p><p><code>_config.yml</code>路径为<code>[博客根目录]/</code><br><code>_config.butterfly.yml</code>路径为<code>[博客根目录]/</code></p><hr><h2 id="Ⅰ-自定义CSS"><a href="#Ⅰ-自定义CSS" class="headerlink" title="Ⅰ.自定义CSS"></a>Ⅰ.自定义CSS</h2><p>在<code>[博客根目录]/themes/butterfly/source/css/</code>处新建<code>custom.css</code>文件</p><h3 id="背景图渐变效果"><a href="#背景图渐变效果" class="headerlink" title="背景图渐变效果"></a>背景图渐变效果</h3><p>在<code>custom.css</code>中添加</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*！背景图渐变效果*/</span></span><br><span class="line"><span class="selector-id">#body-wrap</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">-webkit-linear-gradient</span>(</span><br><span class="line">    <span class="number">0deg</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">247</span>, <span class="number">149</span>, <span class="number">51</span>, <span class="number">0.1</span>) <span class="number">0</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">243</span>, <span class="number">112</span>, <span class="number">85</span>, <span class="number">0.1</span>) <span class="number">15%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">239</span>, <span class="number">78</span>, <span class="number">123</span>, <span class="number">0.1</span>) <span class="number">30%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">161</span>, <span class="number">102</span>, <span class="number">171</span>, <span class="number">0.1</span>) <span class="number">44%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">80</span>, <span class="number">115</span>, <span class="number">184</span>, <span class="number">0.1</span>) <span class="number">58%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">16</span>, <span class="number">152</span>, <span class="number">173</span>, <span class="number">0.1</span>) <span class="number">72%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">7</span>, <span class="number">179</span>, <span class="number">155</span>, <span class="number">0.1</span>) <span class="number">86%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">109</span>, <span class="number">186</span>, <span class="number">130</span>, <span class="number">0.1</span>) <span class="number">100%</span></span><br><span class="line">  );</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">-moz-linear-gradient</span>(</span><br><span class="line">    <span class="number">0deg</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">247</span>, <span class="number">149</span>, <span class="number">51</span>, <span class="number">0.1</span>) <span class="number">0</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">243</span>, <span class="number">112</span>, <span class="number">85</span>, <span class="number">0.1</span>) <span class="number">15%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">239</span>, <span class="number">78</span>, <span class="number">123</span>, <span class="number">0.1</span>) <span class="number">30%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">161</span>, <span class="number">102</span>, <span class="number">171</span>, <span class="number">0.1</span>) <span class="number">44%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">80</span>, <span class="number">115</span>, <span class="number">184</span>, <span class="number">0.1</span>) <span class="number">58%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">16</span>, <span class="number">152</span>, <span class="number">173</span>, <span class="number">0.1</span>) <span class="number">72%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">7</span>, <span class="number">179</span>, <span class="number">155</span>, <span class="number">0.1</span>) <span class="number">86%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">109</span>, <span class="number">186</span>, <span class="number">130</span>, <span class="number">0.1</span>) <span class="number">100%</span></span><br><span class="line">  );</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">-o-linear-gradient</span>(</span><br><span class="line">    <span class="number">0deg</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">247</span>, <span class="number">149</span>, <span class="number">51</span>, <span class="number">0.1</span>) <span class="number">0</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">243</span>, <span class="number">112</span>, <span class="number">85</span>, <span class="number">0.1</span>) <span class="number">15%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">239</span>, <span class="number">78</span>, <span class="number">123</span>, <span class="number">0.1</span>) <span class="number">30%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">161</span>, <span class="number">102</span>, <span class="number">171</span>, <span class="number">0.1</span>) <span class="number">44%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">80</span>, <span class="number">115</span>, <span class="number">184</span>, <span class="number">0.1</span>) <span class="number">58%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">16</span>, <span class="number">152</span>, <span class="number">173</span>, <span class="number">0.1</span>) <span class="number">72%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">7</span>, <span class="number">179</span>, <span class="number">155</span>, <span class="number">0.1</span>) <span class="number">86%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">109</span>, <span class="number">186</span>, <span class="number">130</span>, <span class="number">0.1</span>) <span class="number">100%</span></span><br><span class="line">  );</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">-ms-linear-gradient</span>(</span><br><span class="line">    <span class="number">0deg</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">247</span>, <span class="number">149</span>, <span class="number">51</span>, <span class="number">0.1</span>) <span class="number">0</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">243</span>, <span class="number">112</span>, <span class="number">85</span>, <span class="number">0.1</span>) <span class="number">15%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">239</span>, <span class="number">78</span>, <span class="number">123</span>, <span class="number">0.1</span>) <span class="number">30%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">161</span>, <span class="number">102</span>, <span class="number">171</span>, <span class="number">0.1</span>) <span class="number">44%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">80</span>, <span class="number">115</span>, <span class="number">184</span>, <span class="number">0.1</span>) <span class="number">58%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">16</span>, <span class="number">152</span>, <span class="number">173</span>, <span class="number">0.1</span>) <span class="number">72%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">7</span>, <span class="number">179</span>, <span class="number">155</span>, <span class="number">0.1</span>) <span class="number">86%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">109</span>, <span class="number">186</span>, <span class="number">130</span>, <span class="number">0.1</span>) <span class="number">100%</span></span><br><span class="line">  );</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(</span><br><span class="line">    <span class="number">90deg</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">247</span>, <span class="number">149</span>, <span class="number">51</span>, <span class="number">0.1</span>) <span class="number">0</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">243</span>, <span class="number">112</span>, <span class="number">85</span>, <span class="number">0.1</span>) <span class="number">15%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">239</span>, <span class="number">78</span>, <span class="number">123</span>, <span class="number">0.1</span>) <span class="number">30%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">161</span>, <span class="number">102</span>, <span class="number">171</span>, <span class="number">0.1</span>) <span class="number">44%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">80</span>, <span class="number">115</span>, <span class="number">184</span>, <span class="number">0.1</span>) <span class="number">58%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">16</span>, <span class="number">152</span>, <span class="number">173</span>, <span class="number">0.1</span>) <span class="number">72%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">7</span>, <span class="number">179</span>, <span class="number">155</span>, <span class="number">0.1</span>) <span class="number">86%</span>,</span><br><span class="line">    <span class="built_in">rgba</span>(<span class="number">109</span>, <span class="number">186</span>, <span class="number">130</span>, <span class="number">0.1</span>) <span class="number">100%</span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="透明度调整"><a href="#透明度调整" class="headerlink" title="透明度调整"></a>透明度调整</h3><p>在<code>custom.css</code>中添加</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*页脚透明度调整*/</span></span><br><span class="line"><span class="selector-id">#footer</span> &#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0.9</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 页脚透明 */</span></span><br><span class="line"><span class="selector-id">#footer</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: transparent <span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 页脚黑色透明玻璃效果移除 */</span></span><br><span class="line"><span class="selector-id">#footer</span><span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: transparent <span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 头图透明 */</span></span><br><span class="line"><span class="selector-id">#page-header</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: transparent <span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 头图遮罩层透明 */</span></span><br><span class="line"><span class="selector-id">#page-header</span><span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: transparent <span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*top-img黑色透明玻璃效果 */</span></span><br><span class="line"><span class="selector-id">#page-header</span><span class="selector-class">.post-bg</span><span class="selector-pseudo">:before</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: transparent <span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="自定义字体"><a href="#自定义字体" class="headerlink" title="自定义字体"></a>自定义字体</h3><ol><li><p>在<code>[博客根目录]/themes/butterfly/source/</code>新建文件夹<code>fonts</code><br>将.tff字体文件放进去</p></li><li><p>在<code>custom.css</code>中添加</p> <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="string">&quot;字体名&quot;</span>; <span class="comment">/* 字体名自定义即可 */</span></span><br><span class="line">  <span class="attribute">src</span>: <span class="built_in">url</span>(<span class="string">&quot;/fonts/你的字体文件名.ttf&quot;</span>); <span class="comment">/* 字体文件路径 */</span></span><br><span class="line">  <span class="attribute">font-display</span>: swap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>在<code>_config.butterfly.yml</code>中修改字体配置项</p> <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Global font settings</span></span><br><span class="line"><span class="comment"># Don&#x27;t modify the following settings unless you know how they work (非必要不要修改)</span></span><br><span class="line"><span class="attr">font:</span></span><br><span class="line">  <span class="attr">global-font-size:</span></span><br><span class="line">  <span class="attr">code-font-size:</span></span><br><span class="line">  <span class="attr">font-family:</span> <span class="string">&quot;字体名&quot;</span></span><br><span class="line">  <span class="attr">code-font-family:</span></span><br></pre></td></tr></table></figure></li></ol><hr><h2 id="Ⅱ-插件安装"><a href="#Ⅱ-插件安装" class="headerlink" title="Ⅱ.插件安装"></a>Ⅱ.插件安装</h2><h3 id="Aplayer全局播放器"><a href="#Aplayer全局播放器" class="headerlink" title="Aplayer全局播放器"></a>Aplayer全局播放器</h3><ol><li><p>安装<code>hexo-tag-aplayer</code>插件</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-tag-aplayer --save</span><br></pre></td></tr></table></figure></li><li><p>在<code>_config.yml</code>中新增配置项</p> <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># APlayer</span></span><br><span class="line"><span class="comment"># https://github.com/MoePlayer/hexo-tag-aplayer/blob/master/docs/README-zh_cn.md</span></span><br><span class="line"><span class="attr">aplayer:</span></span><br><span class="line">  <span class="attr">meting:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">asset_inject:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure></li><li><p>在<code>_config.butterfly.yml</code>中修改关于Aplayer配置项</p> <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Inject the css and script (aplayer/meting)</span></span><br><span class="line"><span class="attr">aplayerInject:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">per_page:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></li><li><p>在<code>custom.css</code>添加CSS样式使其自动缩进隐藏</p> <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.aplayer</span><span class="selector-class">.aplayer-fixed</span><span class="selector-class">.aplayer-narrow</span> <span class="selector-class">.aplayer-body</span> &#123;</span><br><span class="line">  <span class="attribute">left</span>: -<span class="number">66px</span> <span class="meta">!important</span>;</span><br><span class="line">  <span class="comment">/* 默认情况下缩进左侧66px，只留一点箭头部分 */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.aplayer</span><span class="selector-class">.aplayer-fixed</span><span class="selector-class">.aplayer-narrow</span> <span class="selector-class">.aplayer-body</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span> <span class="meta">!important</span>;</span><br><span class="line">  <span class="comment">/* 鼠标悬停是左侧缩进归零，完全显示按钮 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>在<code>_config.butterfly.yml</code>的<code>inject</code>配置项中添加Aplayer的容器</p> <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">inject:</span></span><br><span class="line">  <span class="attr">head:</span></span><br><span class="line">  <span class="attr">bottom:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&lt;div</span> <span class="string">class=&quot;aplayer</span> <span class="literal">no</span><span class="string">-destroy&quot;</span> <span class="string">data-id=&quot;5183531430&quot;</span> <span class="string">data-server=&quot;netease&quot;</span> <span class="string">data-type=&quot;playlist&quot;</span> <span class="string">data-fixed=&quot;true&quot;</span> <span class="string">data-mini=&quot;true&quot;</span> <span class="string">data-listFolded=&quot;false&quot;</span> <span class="string">data-order=&quot;random&quot;</span> <span class="string">data-preload=&quot;none&quot;</span> <span class="string">data-autoplay=&quot;false&quot;</span> <span class="string">muted&gt;&lt;/div&gt;</span></span><br></pre></td></tr></table></figure><p> <code>data-id</code>：可填入歌单或歌曲id<br> <code>data-server</code>：服务商，可选<code>netease</code>, <code>tencent</code>, <code>kugou</code>, <code>xiami</code>, <code>baidu</code><br> <code>data-type</code>：类型，可选<code>song</code>, <code>playlist</code>, <code>album</code>, <code>search</code>, <code>artist</code></p></li></ol><h3 id="页脚添加时钟和github徽标"><a href="#页脚添加时钟和github徽标" class="headerlink" title="页脚添加时钟和github徽标"></a>页脚添加时钟和github徽标</h3><ol><li><p>安装<code>butterfly-footer-beautify</code>插件</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-butterfly-footer-beautify --save</span><br></pre></td></tr></table></figure></li><li><p>在<code>_config.yml</code>中新增配置项</p> <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># footer_beautify</span></span><br><span class="line"><span class="comment"># 页脚计时器：[Native JS Timer](https://akilar.top/posts/b941af/)</span></span><br><span class="line"><span class="comment"># 页脚徽标：[Add Github Badge](https://akilar.top/posts/e87ad7f8/)</span></span><br><span class="line"><span class="attr">footer_beautify:</span></span><br><span class="line">  <span class="attr">enable:</span></span><br><span class="line">    <span class="attr">timer:</span> <span class="literal">true</span> <span class="comment"># 计时器开关</span></span><br><span class="line">    <span class="attr">bdage:</span> <span class="literal">true</span> <span class="comment"># 徽标开关</span></span><br><span class="line">  <span class="attr">priority:</span> <span class="number">5</span> <span class="comment">#过滤器优先权</span></span><br><span class="line">  <span class="attr">enable_page:</span> <span class="string">all</span> <span class="comment"># 应用页面</span></span><br><span class="line">  <span class="attr">exclude:</span> <span class="comment">#屏蔽页面</span></span><br><span class="line">    <span class="comment"># - /posts/</span></span><br><span class="line">    <span class="comment"># - /about/</span></span><br><span class="line">  <span class="attr">layout:</span> <span class="comment"># 挂载容器类型</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">id</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">footer-wrap</span></span><br><span class="line">    <span class="attr">index:</span> <span class="number">0</span></span><br><span class="line">  <span class="comment"># 计时器部分配置项</span></span><br><span class="line">  <span class="attr">runtime_js:</span> <span class="string">https://npm.elemecdn.com/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.js</span></span><br><span class="line">  <span class="attr">runtime_css:</span> <span class="string">https://npm.elemecdn.com/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.css</span></span><br><span class="line">  <span class="comment"># 徽标部分配置项</span></span><br><span class="line">  <span class="attr">swiperpara:</span> <span class="number">3</span> <span class="comment">#若非0，则开启轮播功能，每行徽标个数</span></span><br><span class="line">  <span class="attr">bdageitem:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">link:</span> <span class="string">https://hexo.io/</span> <span class="comment">#徽标指向网站链接</span></span><br><span class="line">      <span class="attr">shields:</span> <span class="string">https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo</span> <span class="comment">#徽标API</span></span><br><span class="line">      <span class="attr">message:</span> <span class="string">博客框架为Hexo_v5.4.0</span> <span class="comment">#徽标提示语</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">link:</span> <span class="string">https://butterfly.js.org/</span></span><br><span class="line">      <span class="attr">shields:</span> <span class="string">https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender</span></span><br><span class="line">      <span class="attr">message:</span> <span class="string">主题版本Butterfly_v3.8.2</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">link:</span> <span class="string">https://www.jsdelivr.com/</span></span><br><span class="line">      <span class="attr">shields:</span> <span class="string">https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&amp;logo=jsDelivr</span></span><br><span class="line">      <span class="attr">message:</span> <span class="string">本站使用JsDelivr为静态资源提供CDN加速</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">link:</span> <span class="string">https://vercel.com/</span></span><br><span class="line">      <span class="attr">shields:</span> <span class="string">https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&amp;logo=Vercel</span></span><br><span class="line">      <span class="attr">message:</span> <span class="string">本站采用双线部署，默认线路托管于Vercel</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">link:</span> <span class="string">https://vercel.com/</span></span><br><span class="line">      <span class="attr">shields:</span> <span class="string">https://img.shields.io/badge/Hosted-Coding-0cedbe?style=flat&amp;logo=Codio</span></span><br><span class="line">      <span class="attr">message:</span> <span class="string">本站采用双线部署，联通线路托管于Coding</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">link:</span> <span class="string">https://github.com/</span></span><br><span class="line">      <span class="attr">shields:</span> <span class="string">https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub</span></span><br><span class="line">      <span class="attr">message:</span> <span class="string">本站项目由Github托管</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">link:</span> <span class="string">http://creativecommons.org/licenses/by-nc-sa/4.0/</span></span><br><span class="line">      <span class="attr">shields:</span> <span class="string">https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris</span></span><br><span class="line">      <span class="attr">message:</span> <span class="string">本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可</span></span><br><span class="line">  <span class="attr">swiper_css:</span> <span class="string">https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css</span></span><br><span class="line">  <span class="attr">swiper_js:</span> <span class="string">https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js</span></span><br><span class="line">  <span class="attr">swiperbdage_init_js:</span> <span class="string">https://npm.elemecdn.com/hexo-butterfly-footer-beautify/lib/swiperbdage_init.min.js</span></span><br></pre></td></tr></table></figure></li><li><p>可将<code>runtime_js</code>下载下来自行修改</p></li></ol><h3 id="侧栏添加时钟模块"><a href="#侧栏添加时钟模块" class="headerlink" title="侧栏添加时钟模块"></a>侧栏添加时钟模块</h3><ol><li><p>安装<code>butterfly-clock</code>插件</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-butterfly-clock --save</span><br></pre></td></tr></table></figure></li><li><p>在<code>_config.yml</code>中新增配置项</p> <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># electric_clock</span></span><br><span class="line"><span class="comment"># see https://akilar.top/posts/4e39cf4a/</span></span><br><span class="line"><span class="attr">electric_clock:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span> <span class="comment"># 开关</span></span><br><span class="line">  <span class="attr">priority:</span> <span class="number">5</span> <span class="comment">#过滤器优先权</span></span><br><span class="line">  <span class="attr">enable_page:</span> <span class="string">all</span> <span class="comment"># 应用页面</span></span><br><span class="line">  <span class="attr">exclude:</span></span><br><span class="line">    <span class="comment"># - /posts/</span></span><br><span class="line">    <span class="comment"># - /about/</span></span><br><span class="line">  <span class="attr">layout:</span> <span class="comment"># 挂载容器类型</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">class</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">sticky_layout</span></span><br><span class="line">    <span class="attr">index:</span> <span class="number">0</span></span><br><span class="line">  <span class="attr">loading:</span> <span class="string">https://npm.elemecdn.com/hexo-butterfly-clock/lib/loading.gif</span> <span class="comment">#加载动画自定义</span></span><br><span class="line">  <span class="attr">clock_css:</span> <span class="string">https://npm.elemecdn.com/hexo-butterfly-clock/lib/clock.min.css</span></span><br><span class="line">  <span class="attr">clock_js:</span> <span class="string">https://npm.elemecdn.com/hexo-butterfly-clock/lib/clock.min.js</span></span><br><span class="line">  <span class="attr">ip_api:</span> <span class="string">https://pv.sohu.com/cityjson?ie=utf-8</span></span><br></pre></td></tr></table></figure></li></ol><h3 id="添加gitcalendar模块"><a href="#添加gitcalendar模块" class="headerlink" title="添加gitcalendar模块"></a>添加gitcalendar模块</h3><ol><li><p>安装<code>gitcalendar</code>插件</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-filter-gitcalendar --save</span><br></pre></td></tr></table></figure></li><li><p>在<code>_config.yml</code>中新增配置项</p> <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># hexo-filter-gitcalendar</span></span><br><span class="line"><span class="comment"># see https://akilar.top/posts/1f9c68c9/</span></span><br><span class="line"><span class="attr">gitcalendar:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span> <span class="comment"># 开关</span></span><br><span class="line">  <span class="attr">priority:</span> <span class="number">6</span> <span class="comment">#过滤器优先权</span></span><br><span class="line">  <span class="attr">enable_page:</span> <span class="string">/</span> <span class="comment"># 应用页面</span></span><br><span class="line">  <span class="comment"># butterfly挂载容器</span></span><br><span class="line">  <span class="attr">layout:</span> <span class="comment"># 挂载容器类型</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">id</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">recent-posts</span></span><br><span class="line">    <span class="attr">index:</span> <span class="number">0</span></span><br><span class="line">  <span class="comment"># volantis挂载容器</span></span><br><span class="line">  <span class="comment"># layout:</span></span><br><span class="line">  <span class="comment">#   type: class</span></span><br><span class="line">  <span class="comment">#   name: l_main</span></span><br><span class="line">  <span class="comment">#   index: 0</span></span><br><span class="line">  <span class="comment"># matery挂载容器</span></span><br><span class="line">  <span class="comment"># layout:</span></span><br><span class="line">  <span class="comment">#   type: id</span></span><br><span class="line">  <span class="comment">#   name: indexCard</span></span><br><span class="line">  <span class="comment">#   index: 0</span></span><br><span class="line">  <span class="comment"># mengd挂载容器</span></span><br><span class="line">  <span class="comment"># layout:</span></span><br><span class="line">  <span class="comment">#   type: class</span></span><br><span class="line">  <span class="comment">#   name: content</span></span><br><span class="line">  <span class="comment">#   index: 0</span></span><br><span class="line">  <span class="attr">user:</span> <span class="string">sperte-s</span> <span class="comment">#git用户名</span></span><br><span class="line">  <span class="attr">apiurl:</span> <span class="string">&#x27;https://python-github-calendar-api.vercel.app&#x27;</span></span><br><span class="line">  <span class="attr">minheight:</span></span><br><span class="line">    <span class="attr">pc:</span> <span class="string">280px</span> <span class="comment">#桌面端最小高度</span></span><br><span class="line">    <span class="attr">mibile:</span> <span class="string">0px</span> <span class="comment">#移动端最小高度</span></span><br><span class="line">  <span class="comment">#color: &quot;[&#x27;#ebedf0&#x27;, &#x27;#cdefec&#x27;, &#x27;#a9e4de&#x27;, &#x27;#1fc7b6&#x27;, &#x27;#65cfc5&#x27;, &#x27;#4dc8bb&#x27;, &#x27;#39bbae&#x27;, &#x27;#319d93&#x27;, &#x27;#278178&#x27;, &#x27;#216962&#x27;, &#x27;#1b5852&#x27;]&quot;</span></span><br><span class="line">  <span class="comment">#color: &quot;[&#x27;rgb(145, 145, 145, 0.2)&#x27;, &#x27;#c6ecc1&#x27;, &#x27;#a0e2bb&#x27;, &#x27;#1fc7b6&#x27;, &#x27;#70c5d3&#x27;, &#x27;#60a2ce&#x27;, &#x27;#507ac9&#x27;, &#x27;#4356c5&#x27;, &#x27;#423cc4&#x27;, &#x27;#5b3abc&#x27;, &#x27;#7138b6&#x27;]&quot;</span></span><br><span class="line">  <span class="comment">#color: &quot;[&#x27;#e4dfd7&#x27;, &#x27;#f9f4dc&#x27;, &#x27;#f7e8aa&#x27;, &#x27;#f7e8aa&#x27;, &#x27;#f8df72&#x27;, &#x27;#fcd217&#x27;, &#x27;#fcc515&#x27;, &#x27;#f28e16&#x27;, &#x27;#fb8b05&#x27;, &#x27;#d85916&#x27;, &#x27;#f43e06&#x27;]&quot; #橘黄色调</span></span><br><span class="line">  <span class="comment"># color: &quot;[&#x27;#ebedf0&#x27;, &#x27;#fdcdec&#x27;, &#x27;#fc9bd9&#x27;, &#x27;#fa6ac5&#x27;, &#x27;#f838b2&#x27;, &#x27;#f5089f&#x27;, &#x27;#c4067e&#x27;, &#x27;#92055e&#x27;, &#x27;#540336&#x27;, &#x27;#48022f&#x27;, &#x27;#30021f&#x27;]&quot; #浅紫色调</span></span><br><span class="line">  <span class="comment"># color: &quot;[&#x27;#ebedf0&#x27;, &#x27;#f0fff4&#x27;, &#x27;#dcffe4&#x27;, &#x27;#bef5cb&#x27;, &#x27;#85e89d&#x27;, &#x27;#34d058&#x27;, &#x27;#28a745&#x27;, &#x27;#22863a&#x27;, &#x27;#176f2c&#x27;, &#x27;#165c26&#x27;, &#x27;#144620&#x27;]&quot; #翠绿色调</span></span><br><span class="line">  <span class="attr">color:</span> <span class="string">&quot;[&#x27;#ebedf0&#x27;, &#x27;#f1f8ff&#x27;, &#x27;#dbedff&#x27;, &#x27;#c8e1ff&#x27;, &#x27;#79b8ff&#x27;, &#x27;#2188ff&#x27;, &#x27;#0366d6&#x27;, &#x27;#005cc5&#x27;, &#x27;#044289&#x27;, &#x27;#032f62&#x27;, &#x27;#05264c&#x27;]&quot;</span> <span class="comment">#天青色调</span></span><br><span class="line">  <span class="attr">container:</span> <span class="string">.recent-post-item(style=&#x27;width:100%;height:auto;padding:10px;&#x27;)</span> <span class="comment">#父元素容器，需要使用pug语法</span></span><br><span class="line">  <span class="attr">gitcalendar_css:</span> <span class="string">https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.css</span></span><br><span class="line">  <span class="attr">gitcalendar_js:</span> <span class="string">https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.js</span></span><br></pre></td></tr></table></figure></li></ol><h3 id="首页文章轮播"><a href="#首页文章轮播" class="headerlink" title="首页文章轮播"></a>首页文章轮播</h3><ol><li><p>安装<code>butterfly-swiper</code>插件</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-butterfly-swiper --save</span><br></pre></td></tr></table></figure></li><li><p>在<code>_config.yml</code>中新增配置项</p> <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># hexo-butterfly-swiper</span></span><br><span class="line"><span class="comment"># see https://akilar.top/posts/8e1264d1/</span></span><br><span class="line"><span class="attr">swiper:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span> <span class="comment"># 开关</span></span><br><span class="line">  <span class="attr">priority:</span> <span class="number">5</span> <span class="comment">#过滤器优先权</span></span><br><span class="line">  <span class="attr">enable_page:</span> <span class="string">all</span> <span class="comment"># 应用页面</span></span><br><span class="line">  <span class="attr">timemode:</span> <span class="string">date</span> <span class="comment">#date/updated</span></span><br><span class="line">  <span class="attr">layout:</span> <span class="comment"># 挂载容器类型</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">id</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">recent-posts</span></span><br><span class="line">    <span class="attr">index:</span> <span class="number">0</span></span><br><span class="line">  <span class="attr">default_descr:</span> <span class="string">再怎么看我也不知道怎么描述它的啦！</span></span><br><span class="line">  <span class="attr">swiper_css:</span> <span class="string">https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css</span> <span class="comment">#swiper css依赖</span></span><br><span class="line">  <span class="attr">swiper_js:</span> <span class="string">https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js</span> <span class="comment">#swiper js依赖</span></span><br><span class="line">  <span class="attr">custom_css:</span> <span class="string">https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css</span> <span class="comment"># 适配主题样式补丁</span></span><br><span class="line">  <span class="attr">custom_js:</span> <span class="string">https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js</span> <span class="comment"># swiper初始化方法</span></span><br></pre></td></tr></table></figure></li><li><p>使用方法</p><p> 在文章的<code>front_matter</code>中添加<code>swiper_index</code>配置项即可</p> <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 文章标题</span><br><span class="line">date: 创建日期</span><br><span class="line">updated: 更新日期</span><br><span class="line">cover: 文章封面</span><br><span class="line">description: 文章描述</span><br><span class="line"><span class="section">swiper<span class="emphasis">_index: 1 #置顶轮播图顺序，非负整数，数字越大越靠前</span></span></span><br><span class="line"><span class="emphasis"><span class="section">---</span></span></span><br></pre></td></tr></table></figure></li></ol><hr><h2 id="后言"><a href="#后言" class="headerlink" title="后言"></a>后言</h2><p>魔改一时爽，一直魔改一直爽。</p><hr><details class="toggle" style="border: 1px solid #A4D8FA"><summary class="toggle-button" style="background-color: #A4D8FA;">文章参考</summary><div class="toggle-content"><p><a href="https://akilar.top/posts/f99b208/">主题美化日记 | 糖果屋</a><br><a href="https://www.antmoe.com/posts/7198453/">Hexo博客之butterfly主题优雅更换背景 | 小康博客</a></p></div></details>]]></content>
+      
+      
+      <categories>
+          
+          <category> 经验 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 笔记 </tag>
+            
+            <tag> 教程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>动漫下载站点推荐</title>
+      <link href="/posts/57505/"/>
+      <url>/posts/57505/</url>
+      
+        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一些动漫下载网站推荐</p><h2 id="Ⅰ-蜜柑计划"><a href="#Ⅰ-蜜柑计划" class="headerlink" title="Ⅰ.蜜柑计划"></a>Ⅰ.蜜柑计划</h2><a class="btn-beautify " href="https://mikanani.me/"   title="官网"><span>官网</span></a><ul><li><p>本人常用的动漫BT下载站</p></li><li><p>由南+运营（大概）</p></li><li><p>中文搜索友好 资源齐全 数据来源为动漫花园</p></li><li><p>有管理追番进度功能 可设置浏览器插件提醒</p></li></ul><p><img src="https://npm.elemecdn.com/sperte-img/picgo/mikan.webp" alt="mikan"></p><hr><h2 id="Ⅱ-动漫花园"><a href="#Ⅱ-动漫花园" class="headerlink" title="Ⅱ.动漫花园"></a>Ⅱ.动漫花园</h2><a class="btn-beautify " href="https://share.dmhy.org/"   title="官网"><span>官网</span></a><ul><li>最大的中文动漫BT站点，可惜大陆无法访问</li></ul><p><img src="https://npm.elemecdn.com/sperte-img/picgo/%E5%8A%A8%E6%BC%AB%E8%8A%B1%E5%9B%AD.webp" alt="动漫花园"></p><hr><h2 id="Ⅲ-简单动漫"><a href="#Ⅲ-简单动漫" class="headerlink" title="Ⅲ.简单动漫"></a>Ⅲ.简单动漫</h2><a class="btn-beautify " href="https://www.36dm.club/"   title="官网"><span>官网</span></a><ul><li>使用动漫花园的数据，更新要慢一点，大陆可访问</li></ul><p><img src="https://npm.elemecdn.com/sperte-img/picgo/%E7%AE%80%E5%8D%95%E5%8A%A8%E6%BC%AB.webp" alt="简单动漫"></p><hr><h2 id="Ⅳ-Nyaa"><a href="#Ⅳ-Nyaa" class="headerlink" title="Ⅳ.Nyaa"></a>Ⅳ.Nyaa</h2><a class="btn-beautify " href="https://nyaa.si/"   title="官网"><span>官网</span></a><a class="btn-beautify " href="https://nyaa.iss.one/"   title="镜像站"><span>镜像站</span></a><a class="btn-beautify " href="https://nyaa.net/"   title="备份站"><span>备份站</span></a><ul><li><p>新番老番资源齐全，全球最大的动漫BT下载站点，可惜大陆地区无法访问</p></li><li><p>中文搜索不友好，资源标题几乎全是英文，搜索资源时请使用番剧的英文名或罗马音</p></li><li><p>镜像站和备份站大陆地区都可以访问</p></li><li><p><del>好像还有个里站来着(</del></p></li></ul><p><img src="https://npm.elemecdn.com/sperte-img/picgo/nyaa.webp" alt="nyaa"></p><hr><h2 id="Ⅴ-东京图书馆"><a href="#Ⅴ-东京图书馆" class="headerlink" title="Ⅴ.东京图书馆"></a>Ⅴ.东京图书馆</h2><a class="btn-beautify " href="https://www.tokyotosho.info/"   title="官网"><span>官网</span></a><ul><li>冷门资源和老物较多，大陆访问较慢</li></ul><p><img src="https://npm.elemecdn.com/sperte-img/picgo/%E4%B8%9C%E4%BA%AC%E5%9B%BE%E4%B9%A6%E9%A6%86.webp" alt="东京图书馆"></p><hr><h2 id="Ⅵ-末日动漫"><a href="#Ⅵ-末日动漫" class="headerlink" title="Ⅵ.末日动漫"></a>Ⅵ.末日动漫</h2><a class="btn-beautify " href="https://share.acgnx.se/"   title="中国站"><span>中国站</span></a><a class="btn-beautify " href="https://www.acgnx.se/"   title="国际站"><span>国际站</span></a><ul><li>资源齐全，中文搜索友好，大陆可正常访问</li></ul><p><img src="https://npm.elemecdn.com/sperte-img/picgo/%E6%9C%AB%E6%97%A5%E5%8A%A8%E6%BC%AB.webp" alt="末日动漫"></p><hr><h2 id="Ⅶ-其它"><a href="#Ⅶ-其它" class="headerlink" title="Ⅶ.其它"></a>Ⅶ.其它</h2><ul><li><a class="btn-beautify " href="https://acg.rip/"   title="ACG.RIP"><span>ACG.RIP</span></a></li><li><a class="btn-beautify " href="https://bangumi.moe/"   title="萌番组"><span>萌番组</span></a></li><li><a class="btn-beautify " href="http://www.miobt.com/"   title="MioBT"><span>MioBT</span></a></li></ul><hr><h2 id="后言"><a href="#后言" class="headerlink" title="后言"></a>后言</h2><p>以上网站下载方式均为BT，记得使用正规BT下载软件并积极上传，拒绝吸血雷。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 发现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 网站推荐 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>如何优雅的本地追番</title>
+      <link href="/posts/45733/"/>
+      <url>/posts/45733/</url>
+      
+        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>自从上次在B站港澳台看无职转生发现有删减时，本人就变成下载党了。于是，今天把我的本地追番方案分享出来。</p><hr><h2 id="Ⅰ-准备"><a href="#Ⅰ-准备" class="headerlink" title="Ⅰ.准备"></a>Ⅰ.准备</h2><ul><li>qBittorrent Enhanced Edition（或其它带有RSS订阅的BT下载软件）</li><li>Mikan账号（或其它带有类似功能的网站）</li><li>PotPlayer（可选）</li></ul><hr><h2 id="Ⅱ-在Mikan获取RSS订阅"><a href="#Ⅱ-在Mikan获取RSS订阅" class="headerlink" title="Ⅱ.在Mikan获取RSS订阅"></a>Ⅱ.在Mikan获取RSS订阅</h2><h3 id="注册并登录Mikan"><a href="#注册并登录Mikan" class="headerlink" title="注册并登录Mikan"></a>注册并登录Mikan</h3><a class="btn-beautify " href="https://mikanani.me/"   title="官网"><span>官网</span></a><h3 id="订阅番剧或字幕组"><a href="#订阅番剧或字幕组" class="headerlink" title="订阅番剧或字幕组"></a>订阅番剧或字幕组</h3><p><img src="https://npm.elemecdn.com/sperte-img/picgo/GGmPS8.webp" alt="订阅番剧"></p><h3 id="获取RSS订阅"><a href="#获取RSS订阅" class="headerlink" title="获取RSS订阅"></a>获取RSS订阅</h3><p><img src="https://npm.elemecdn.com/sperte-img/picgo/DuL0SS.webp" alt="获取RSS订阅"></p><hr><h2 id="Ⅲ-在qBittorrent中订阅RSS"><a href="#Ⅲ-在qBittorrent中订阅RSS" class="headerlink" title="Ⅲ.在qBittorrent中订阅RSS"></a>Ⅲ.在qBittorrent中订阅RSS</h2><h3 id="下载并安装"><a href="#下载并安装" class="headerlink" title="下载并安装"></a>下载并安装</h3><a class="btn-beautify " href="https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases/"   title="Github"><span>Github</span></a><h3 id="订阅RSS"><a href="#订阅RSS" class="headerlink" title="订阅RSS"></a>订阅RSS</h3><p><img src="https://npm.elemecdn.com/sperte-img/picgo/1yrjf9.webp" alt="订阅RSS"><br><img src="https://npm.elemecdn.com/sperte-img/picgo/5GmPiP.webp" alt="订阅RSS1"><br><img src="https://npm.elemecdn.com/sperte-img/picgo/08qPCK.webp" alt="订阅RSS2"></p><ul><li>双击即可下载番剧</li></ul><h3 id="设置自动下载-可选"><a href="#设置自动下载-可选" class="headerlink" title="设置自动下载(可选)"></a>设置自动下载(可选)</h3><p><img src="https://npm.elemecdn.com/sperte-img/picgo/L8qXP4.webp" alt="自动下载"></p><hr><h2 id="Ⅳ-完成"><a href="#Ⅳ-完成" class="headerlink" title="Ⅳ.完成"></a>Ⅳ.完成</h2><hr><h2 id="后言"><a href="#后言" class="headerlink" title="后言"></a>后言</h2><p>下载完记得做种哦</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 经验 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 教程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>如何养成良好的提问习惯</title>
+      <link href="/posts/42604/"/>
+      <url>/posts/42604/</url>
+      
+        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近想着建个PT站，然后就到Github上找了找框架，没想到还真有。于是，我就按教程搭了起来，搭的时候还算顺利，结果具体设置时，就小错误不断了。作为一个菜鸟，我自然是跑到作者Q群里去问问题了，结果便是，我问的问题一大半是文档里有的，而我在安装完之后就把文档丢一边去了。我深感惭愧，于是，有了这篇文章。</p><hr><h2 id="Ⅰ-提问前"><a href="#Ⅰ-提问前" class="headerlink" title="Ⅰ.提问前"></a>Ⅰ.提问前</h2><h3 id="看文档"><a href="#看文档" class="headerlink" title="看文档"></a>看文档</h3><p>其实很多常见问题，都可以在文档中找到解决方案，不要只是大致看看，要细致的浏览。当然，开发方面可以不看，如果只是使用的话。</p><h3 id="善用搜索引擎"><a href="#善用搜索引擎" class="headerlink" title="善用搜索引擎"></a>善用搜索引擎</h3><p>一定！一定！一定！要善用搜索引擎。<br>很多时候，并不只是你一个人遇到问题，当有很多人遇到这个问题时，你到网上找现成的解决方案，远比去问作者或其他人效率要高。</p><p><img src="https://npm.elemecdn.com/sperte-img/picgo/rr1W1C.webp" alt="搜索"></p><h3 id="多思考"><a href="#多思考" class="headerlink" title="多思考"></a>多思考</h3><p>在遇上问题时，应在独立思考后，确认自己无法解决时再去求助，而不是遇到一个问题，连分析都没分析，便去寻找帮助了。</p><hr><h2 id="Ⅱ-提问时"><a href="#Ⅱ-提问时" class="headerlink" title="Ⅱ.提问时"></a>Ⅱ.提问时</h2><h3 id="态度"><a href="#态度" class="headerlink" title="态度"></a>态度</h3><p>态度要诚恳，没人有义务回答你的问题，要杜绝爷新行为，要有诚恳的态度和礼貌的语言，大佬们一般都会为你答疑解惑的。</p><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>问题描述要清晰，若有错误日志，一定要带上，并且把测试环境也描述清楚。</p><p><img src="https://npm.elemecdn.com/sperte-img/picgo/a54ajT.webp" alt="问题描述1"></p><p><img src="https://npm.elemecdn.com/sperte-img/picgo/vbHC8O.webp" alt="问题描述2"></p><hr><h2 id="Ⅲ-提问后"><a href="#Ⅲ-提问后" class="headerlink" title="Ⅲ.提问后"></a>Ⅲ.提问后</h2><h3 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h3><p>无论问题有没有得到解决，要记得感谢回答的人，感谢提供解决方案的人，学会感恩。</p><h3 id="分享"><a href="#分享" class="headerlink" title="分享"></a>分享</h3><p>在有能力的情况下，将自己问题的解决方案发布到网上，供后人参考。</p><h3 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h3><p>反思为什么会出现这个问题，以及你在这个问题里学到了什么。</p><hr><h2 id="后言"><a href="#后言" class="headerlink" title="后言"></a>后言</h2><p>良好的提问习惯是一项必不可少的技能，掌握它，然后解决问题吧。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 经验 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 随笔 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>用Calibre和KOReader搭建私人图书馆</title>
+      <link href="/posts/15939/"/>
+      <url>/posts/15939/</url>
+      
+        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本人省吃俭用买了一台电纸书，于是有了这篇文章。</p><h2 id="Ⅰ-准备"><a href="#Ⅰ-准备" class="headerlink" title="Ⅰ.准备"></a>Ⅰ.准备</h2><ul><li>一台安卓系统的电纸书</li><li>Calibre客户端</li><li>KOReader客户端</li><li>一台电脑</li><li>嗯，就这些…….</li></ul><hr><h2 id="Ⅱ-下载书籍"><a href="#Ⅱ-下载书籍" class="headerlink" title="Ⅱ.下载书籍"></a>Ⅱ.下载书籍</h2><h3 id="Z-Library"><a href="#Z-Library" class="headerlink" title="Z-Library"></a>Z-Library</h3><a class="btn-beautify " href="https://z-lib.org/"   title="官网"><span>官网</span></a><ul><li>大部分书都可以在上面找到</li><li>非捐助者每个IP每日可下载5本书</li><li>捐助用户每日可下载10本书</li></ul><h3 id="待更新"><a href="#待更新" class="headerlink" title="待更新"></a>待更新</h3><hr><h2 id="Ⅲ-安装Calibre并搭建书库"><a href="#Ⅲ-安装Calibre并搭建书库" class="headerlink" title="Ⅲ.安装Calibre并搭建书库"></a>Ⅲ.安装Calibre并搭建书库</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><a class="btn-beautify " href="https://github.com/kovidgoyal/calibre/"   title="Github"><span>Github</span></a><a class="btn-beautify " href="https://calibre-ebook.com/"   title="官网"><span>官网</span></a><h3 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h3><p><img src="https://npm.elemecdn.com/sperte-img/picgo/50Oez1.webp" alt="导入书籍"></p><h3 id="编辑元数据"><a href="#编辑元数据" class="headerlink" title="编辑元数据"></a>编辑元数据</h3><ul><li>可在<a class="btn-beautify " href="https://book.douban.com/"   title="豆瓣读书"><span>豆瓣读书</span></a>等网站搜索书籍的ISBN码。</li><li>遇个别书籍Calibre下载元数据失败的，可手动输入元数据。</li></ul><p><img src="https://npm.elemecdn.com/sperte-img/picgo/jrrfv9.webp" alt="编辑元数据1"><br><img src="https://npm.elemecdn.com/sperte-img/picgo/0mXHuP.webp" alt="编辑元数据2"><br><img src="https://npm.elemecdn.com/sperte-img/picgo/DGOWr9.webp" alt="下载元数据"></p><hr><h2 id="Ⅳ-安装KOReader并设置"><a href="#Ⅳ-安装KOReader并设置" class="headerlink" title="Ⅳ.安装KOReader并设置"></a>Ⅳ.安装KOReader并设置</h2><h3 id="下载并安装"><a href="#下载并安装" class="headerlink" title="下载并安装"></a>下载并安装</h3><a class="btn-beautify " href="https://github.com/koreader/koreader/"   title="Github"><span>Github</span></a><a class="btn-beautify " href="https://koreader.rocks/"   title="官网"><span>官网</span></a><h3 id="按自己喜好调整设置"><a href="#按自己喜好调整设置" class="headerlink" title="按自己喜好调整设置"></a>按自己喜好调整设置</h3><p><img src="https://npm.elemecdn.com/sperte-img/picgo/4GarPS.webp" alt="调整设置"></p><hr><h2 id="Ⅴ-用KOReader链接Calibre"><a href="#Ⅴ-用KOReader链接Calibre" class="headerlink" title="Ⅴ.用KOReader链接Calibre"></a>Ⅴ.用KOReader链接Calibre</h2><h3 id="在Calibre中开启无线设备连接"><a href="#在Calibre中开启无线设备连接" class="headerlink" title="在Calibre中开启无线设备连接"></a>在Calibre中开启无线设备连接</h3><p><img src="https://npm.elemecdn.com/sperte-img/picgo/nDenPC.webp" alt="连接1"></p><h3 id="在KOReader中打开连接"><a href="#在KOReader中打开连接" class="headerlink" title="在KOReader中打开连接"></a>在KOReader中打开连接</h3><p><img src="https://npm.elemecdn.com/sperte-img/picgo/nzHGqP.webp" alt="连接2"><br><img src="https://npm.elemecdn.com/sperte-img/picgo/TCWHeT.webp" alt="连接3"></p><h3 id="在Calibre中发送书籍"><a href="#在Calibre中发送书籍" class="headerlink" title="在Calibre中发送书籍"></a>在Calibre中发送书籍</h3><p><img src="https://npm.elemecdn.com/sperte-img/picgo/bfjTSS.webp" alt="发送"></p><ul><li>来杯茶，等待传输完成……</li></ul><h3 id="在KOReader中设置主目录"><a href="#在KOReader中设置主目录" class="headerlink" title="在KOReader中设置主目录"></a>在KOReader中设置主目录</h3><ul><li>长按文件夹切出选项卡</li></ul><p><img src="https://npm.elemecdn.com/sperte-img/picgo/8GazL4.webp" alt="主目录"></p><hr><h2 id="Ⅵ-完成"><a href="#Ⅵ-完成" class="headerlink" title="Ⅵ.完成"></a>Ⅵ.完成</h2><hr><h2 id="后言"><a href="#后言" class="headerlink" title="后言"></a>后言</h2><p>享受阅读吧</p><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> 经验 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 教程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>

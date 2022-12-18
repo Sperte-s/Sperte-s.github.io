@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Timero</title>
+  
+  
+  <link href="https://blog.timero.xyz/atom.xml" rel="self"/>
+  
+  <link href="https://blog.timero.xyz/"/>
+  <updated>2022-12-16T22:34:54.000Z</updated>
+  <id>https://blog.timero.xyz/</id>
+  
+  <author>
+    <name>Sperte</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Discuz3.4迁移教程（宝塔面板）</title>
+    <link href="https://blog.timero.xyz/posts/31467/"/>
+    <id>https://blog.timero.xyz/posts/31467/</id>
+    <published>2022-12-16T18:07:11.000Z</published>
+    <updated>2022-12-16T22:34:54.000Z</updated>
+    
+    
+    <summary type="html">高效迁移Discuz3.4,，不使用官方的备份功能。</summary>
+    
+    
+    
+    <category term="经验" scheme="https://blog.timero.xyz/categories/%E7%BB%8F%E9%AA%8C/"/>
+    
+    
+    <category term="教程" scheme="https://blog.timero.xyz/tags/%E6%95%99%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>KonataのVCR食用手册</title>
+    <link href="https://blog.timero.xyz/posts/63574/"/>
+    <id>https://blog.timero.xyz/posts/63574/</id>
+    <published>2022-12-01T23:11:56.000Z</published>
+    <updated>2022-12-18T02:09:15.725Z</updated>
+    
+    
+    <summary type="html">KonataのVCR配置流程及使用技巧</summary>
+    
+    
+    
+    <category term="经验" scheme="https://blog.timero.xyz/categories/%E7%BB%8F%E9%AA%8C/"/>
+    
+    
+    <category term="教程" scheme="https://blog.timero.xyz/tags/%E6%95%99%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>巨人的肩膀</title>
+    <link href="https://blog.timero.xyz/posts/47137/"/>
+    <id>https://blog.timero.xyz/posts/47137/</id>
+    <published>2022-09-09T22:14:41.000Z</published>
+    <updated>2022-12-18T02:09:15.725Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="创作" scheme="https://blog.timero.xyz/categories/%E5%88%9B%E4%BD%9C/"/>
+    
+    
+    <category term="微小说" scheme="https://blog.timero.xyz/tags/%E5%BE%AE%E5%B0%8F%E8%AF%B4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>夜间起舞</title>
+    <link href="https://blog.timero.xyz/posts/19866/"/>
+    <id>https://blog.timero.xyz/posts/19866/</id>
+    <published>2022-07-21T23:27:53.000Z</published>
+    <updated>2022-12-18T02:09:15.725Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="日记" scheme="https://blog.timero.xyz/categories/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+    <category term="随笔" scheme="https://blog.timero.xyz/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何在Windows上畅玩《混沌之子Love亲☆亲》汉化版</title>
+    <link href="https://blog.timero.xyz/posts/10007/"/>
+    <id>https://blog.timero.xyz/posts/10007/</id>
+    <published>2022-07-20T13:30:55.000Z</published>
+    <updated>2022-12-18T02:09:15.725Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="经验" scheme="https://blog.timero.xyz/categories/%E7%BB%8F%E9%AA%8C/"/>
+    
+    
+    <category term="教程" scheme="https://blog.timero.xyz/tags/%E6%95%99%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>窒息后的拥抱</title>
+    <link href="https://blog.timero.xyz/posts/24359/"/>
+    <id>https://blog.timero.xyz/posts/24359/</id>
+    <published>2022-07-16T11:31:44.000Z</published>
+    <updated>2022-12-18T02:09:15.725Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="创作" scheme="https://blog.timero.xyz/categories/%E5%88%9B%E4%BD%9C/"/>
+    
+    
+    <category term="随笔" scheme="https://blog.timero.xyz/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>下雨小记</title>
+    <link href="https://blog.timero.xyz/posts/50235/"/>
+    <id>https://blog.timero.xyz/posts/50235/</id>
+    <published>2022-06-30T14:20:47.000Z</published>
+    <updated>2022-12-18T02:09:15.725Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="日记" scheme="https://blog.timero.xyz/categories/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+    <category term="随笔" scheme="https://blog.timero.xyz/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>6月30日 星期四 原味薯片</title>
+    <link href="https://blog.timero.xyz/posts/20203/"/>
+    <id>https://blog.timero.xyz/posts/20203/</id>
+    <published>2022-06-30T12:28:03.000Z</published>
+    <updated>2022-12-18T02:09:15.725Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="日记" scheme="https://blog.timero.xyz/categories/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>6月19日 星期天 融化了的巧克力</title>
+    <link href="https://blog.timero.xyz/posts/38282/"/>
+    <id>https://blog.timero.xyz/posts/38282/</id>
+    <published>2022-06-19T13:34:36.000Z</published>
+    <updated>2022-12-18T02:09:15.725Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="日记" scheme="https://blog.timero.xyz/categories/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>5月29日 星期天 冰块与糖</title>
+    <link href="https://blog.timero.xyz/posts/31466/"/>
+    <id>https://blog.timero.xyz/posts/31466/</id>
+    <published>2022-05-29T18:46:28.000Z</published>
+    <updated>2022-12-18T02:09:15.725Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="日记" scheme="https://blog.timero.xyz/categories/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>5月24日 星期二 闲来无事</title>
+    <link href="https://blog.timero.xyz/posts/55651/"/>
+    <id>https://blog.timero.xyz/posts/55651/</id>
+    <published>2022-05-24T23:12:16.000Z</published>
+    <updated>2022-12-18T02:09:15.725Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="日记" scheme="https://blog.timero.xyz/categories/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>深蓝色的陪伴</title>
+    <link href="https://blog.timero.xyz/posts/48374/"/>
+    <id>https://blog.timero.xyz/posts/48374/</id>
+    <published>2022-05-23T18:50:12.000Z</published>
+    <updated>2022-12-18T02:09:15.725Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="创作" scheme="https://blog.timero.xyz/categories/%E5%88%9B%E4%BD%9C/"/>
+    
+    
+    <category term="诗" scheme="https://blog.timero.xyz/tags/%E8%AF%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>5月18日 星期三 橙味芬达</title>
+    <link href="https://blog.timero.xyz/posts/32451/"/>
+    <id>https://blog.timero.xyz/posts/32451/</id>
+    <published>2022-05-18T18:52:56.000Z</published>
+    <updated>2022-12-18T02:09:15.725Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="日记" scheme="https://blog.timero.xyz/categories/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>茶馆与少女</title>
+    <link href="https://blog.timero.xyz/posts/46456/"/>
+    <id>https://blog.timero.xyz/posts/46456/</id>
+    <published>2022-05-14T18:50:24.000Z</published>
+    <updated>2022-12-18T02:09:15.725Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="创作" scheme="https://blog.timero.xyz/categories/%E5%88%9B%E4%BD%9C/"/>
+    
+    
+    <category term="诗" scheme="https://blog.timero.xyz/tags/%E8%AF%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>绿色的泪水</title>
+    <link href="https://blog.timero.xyz/posts/50928/"/>
+    <id>https://blog.timero.xyz/posts/50928/</id>
+    <published>2022-05-13T17:58:42.000Z</published>
+    <updated>2022-12-18T02:09:15.725Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="创作" scheme="https://blog.timero.xyz/categories/%E5%88%9B%E4%BD%9C/"/>
+    
+    
+    <category term="微小说" scheme="https://blog.timero.xyz/tags/%E5%BE%AE%E5%B0%8F%E8%AF%B4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>5月12日 星期四 期待星期天</title>
+    <link href="https://blog.timero.xyz/posts/50791/"/>
+    <id>https://blog.timero.xyz/posts/50791/</id>
+    <published>2022-05-12T18:50:38.000Z</published>
+    <updated>2022-12-18T02:09:15.725Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="日记" scheme="https://blog.timero.xyz/categories/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>5月11日 星期三 一杯温白开</title>
+    <link href="https://blog.timero.xyz/posts/64859/"/>
+    <id>https://blog.timero.xyz/posts/64859/</id>
+    <published>2022-05-11T19:04:28.000Z</published>
+    <updated>2022-12-18T02:09:15.725Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="日记" scheme="https://blog.timero.xyz/categories/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Butterfly主题美化笔记</title>
+    <link href="https://blog.timero.xyz/posts/40304/"/>
+    <id>https://blog.timero.xyz/posts/40304/</id>
+    <published>2022-05-11T08:35:13.000Z</published>
+    <updated>2022-12-18T02:09:15.725Z</updated>
+    
+    
+    <summary type="html">记录主题的魔改历程</summary>
+    
+    
+    
+    <category term="经验" scheme="https://blog.timero.xyz/categories/%E7%BB%8F%E9%AA%8C/"/>
+    
+    
+    <category term="笔记" scheme="https://blog.timero.xyz/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="教程" scheme="https://blog.timero.xyz/tags/%E6%95%99%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>动漫下载站点推荐</title>
+    <link href="https://blog.timero.xyz/posts/57505/"/>
+    <id>https://blog.timero.xyz/posts/57505/</id>
+    <published>2022-05-03T21:25:25.000Z</published>
+    <updated>2022-12-18T02:09:15.725Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="发现" scheme="https://blog.timero.xyz/categories/%E5%8F%91%E7%8E%B0/"/>
+    
+    
+    <category term="网站推荐" scheme="https://blog.timero.xyz/tags/%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何优雅的本地追番</title>
+    <link href="https://blog.timero.xyz/posts/45733/"/>
+    <id>https://blog.timero.xyz/posts/45733/</id>
+    <published>2022-05-03T21:18:18.000Z</published>
+    <updated>2022-12-18T02:09:15.725Z</updated>
+    
+    
+    <summary type="html">提升下载党的追番体验</summary>
+    
+    
+    
+    <category term="经验" scheme="https://blog.timero.xyz/categories/%E7%BB%8F%E9%AA%8C/"/>
+    
+    
+    <category term="教程" scheme="https://blog.timero.xyz/tags/%E6%95%99%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何养成良好的提问习惯</title>
+    <link href="https://blog.timero.xyz/posts/42604/"/>
+    <id>https://blog.timero.xyz/posts/42604/</id>
+    <published>2022-05-03T20:59:07.000Z</published>
+    <updated>2022-12-18T02:09:15.725Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="经验" scheme="https://blog.timero.xyz/categories/%E7%BB%8F%E9%AA%8C/"/>
+    
+    
+    <category term="随笔" scheme="https://blog.timero.xyz/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用Calibre和KOReader搭建私人图书馆</title>
+    <link href="https://blog.timero.xyz/posts/15939/"/>
+    <id>https://blog.timero.xyz/posts/15939/</id>
+    <published>2022-05-03T20:39:12.000Z</published>
+    <updated>2022-12-18T02:09:15.725Z</updated>
+    
+    
+    <summary type="html">多读书，多看报，少吃零食，多睡觉</summary>
+    
+    
+    
+    <category term="经验" scheme="https://blog.timero.xyz/categories/%E7%BB%8F%E9%AA%8C/"/>
+    
+    
+    <category term="教程" scheme="https://blog.timero.xyz/tags/%E6%95%99%E7%A8%8B/"/>
+    
+  </entry>
+  
+</feed>
